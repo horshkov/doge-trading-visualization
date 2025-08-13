@@ -1,0 +1,857 @@
+{
+  "timestamp": "2025-08-13T16:17:11.509Z",
+  "market": {
+    "title": "DOGE above $0.24072 Analysis",
+    "targetPrice": 0.24072,
+    "finalPrice": 0.24123809000000002,
+    "targetHit": true
+  },
+  "pythPrice": {
+    "current": {
+      "price": 0.24245503000000002,
+      "confidence": 0.00024748,
+      "publishTime": "2025-08-13T16:17:07.000Z",
+      "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+    },
+    "historical": [
+      {
+        "timestamp": "2025-08-13T15:03:29.000Z",
+        "price": 0.2414408,
+        "confidence": 0.0002265,
+        "publishTime": "2025-08-13T15:03:29.000Z",
+        "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+      },
+      {
+        "timestamp": "2025-08-13T15:43:17.000Z",
+        "price": 0.24260645,
+        "confidence": 0.00025476,
+        "publishTime": "2025-08-13T15:43:17.000Z",
+        "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+      },
+      {
+        "timestamp": "2025-08-13T16:00:07.000Z",
+        "price": 0.24148871,
+        "confidence": 0.00024966,
+        "publishTime": "2025-08-13T16:00:07.000Z",
+        "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+      },
+      {
+        "timestamp": "2025-08-13T15:47:29.000Z",
+        "price": 0.24183235,
+        "confidence": 0.00023998000000000002,
+        "publishTime": "2025-08-13T15:47:29.000Z",
+        "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+      },
+      {
+        "timestamp": "2025-08-13T15:48:57.000Z",
+        "price": 0.24198958,
+        "confidence": 0.00024116,
+        "publishTime": "2025-08-13T15:48:57.000Z",
+        "priceId": "dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c"
+      }
+    ]
+  },
+  "trading": {
+    "totalTrades": 88,
+    "yesBets": 48,
+    "noBets": 40,
+    "yesVolume": 2187.957095681288,
+    "noVolume": 197.546723705103,
+    "marketSentiment": "Bullish",
+    "sentimentAccuracy": true
+  },
+  "trades": [
+    {
+      "timestamp": "2025-08-13T15:03:29.000Z",
+      "time": "16:03:29",
+      "contracts": 1.975489,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Tlingg",
+      "tradeAmountUSD": 0.999723
+    },
+    {
+      "timestamp": "2025-08-13T15:04:25.000Z",
+      "time": "16:04:25",
+      "contracts": 3.989237,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 1.999446
+    },
+    {
+      "timestamp": "2025-08-13T15:04:47.000Z",
+      "time": "16:04:47",
+      "contracts": 33.725627,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "EL CERTIFIED",
+      "tradeAmountUSD": 19.99446
+    },
+    {
+      "timestamp": "2025-08-13T15:05:19.000Z",
+      "time": "16:05:19",
+      "contracts": 25.635501,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x213f5aE429300be3cf1c13e9AC7f6713590eA08E",
+      "tradeAmountUSD": 9.99723
+    },
+    {
+      "timestamp": "2025-08-13T15:05:27.000Z",
+      "time": "16:05:27",
+      "contracts": 10.483424,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998615
+    },
+    {
+      "timestamp": "2025-08-13T15:05:41.000Z",
+      "time": "16:05:41",
+      "contracts": 10.483421,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.973651916690001
+    },
+    {
+      "timestamp": "2025-08-13T15:05:43.000Z",
+      "time": "16:05:43",
+      "contracts": 2.191614,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "tradeAmountUSD": 0.999723
+    },
+    {
+      "timestamp": "2025-08-13T15:05:53.000Z",
+      "time": "16:05:53",
+      "contracts": 10.259975,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998615
+    },
+    {
+      "timestamp": "2025-08-13T15:06:07.000Z",
+      "time": "16:06:07",
+      "contracts": 3.989235,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -1.902805776759
+    },
+    {
+      "timestamp": "2025-08-13T15:08:21.000Z",
+      "time": "16:08:21",
+      "contracts": 10.259976,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -5.17738474596
+    },
+    {
+      "timestamp": "2025-08-13T15:09:35.000Z",
+      "time": "16:09:35",
+      "contracts": 31.794595,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "ChaJungKyu",
+      "tradeAmountUSD": 18.994661
+    },
+    {
+      "timestamp": "2025-08-13T15:09:57.000Z",
+      "time": "16:09:57",
+      "contracts": 19.490677,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x034C69359dAa2c1ea728c52fbe448e071ff16B6A",
+      "tradeAmountUSD": 13.796122200000001
+    },
+    {
+      "timestamp": "2025-08-13T15:10:59.000Z",
+      "time": "16:10:59",
+      "contracts": 1.90679,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Jiwoin",
+      "tradeAmountUSD": 0.4998595
+    },
+    {
+      "timestamp": "2025-08-13T15:11:13.000Z",
+      "time": "16:11:13",
+      "contracts": 3.677686,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Tiep05",
+      "tradeAmountUSD": 0.999719
+    },
+    {
+      "timestamp": "2025-08-13T15:11:39.000Z",
+      "time": "16:11:39",
+      "contracts": 16.160118,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998445
+    },
+    {
+      "timestamp": "2025-08-13T15:15:41.000Z",
+      "time": "16:15:41",
+      "contracts": 27.98145,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x807472D16F72d22326bE0Af18DB28966B5818a79",
+      "tradeAmountUSD": 19.99254
+    },
+    {
+      "timestamp": "2025-08-13T15:16:37.000Z",
+      "time": "16:16:37",
+      "contracts": 18.520887,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998135
+    },
+    {
+      "timestamp": "2025-08-13T15:17:27.000Z",
+      "time": "16:17:27",
+      "contracts": 57.623632,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Crypto Tariqul",
+      "tradeAmountUSD": 24.990675
+    },
+    {
+      "timestamp": "2025-08-13T15:17:57.000Z",
+      "time": "16:17:57",
+      "contracts": 34.681006,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -16.840892003352003
+    },
+    {
+      "timestamp": "2025-08-13T15:18:33.000Z",
+      "time": "16:18:33",
+      "contracts": 11.60125,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998135
+    },
+    {
+      "timestamp": "2025-08-13T15:19:29.000Z",
+      "time": "16:19:29",
+      "contracts": 11.601249,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.973528540638
+    },
+    {
+      "timestamp": "2025-08-13T15:23:41.000Z",
+      "time": "16:23:41",
+      "contracts": 0.247756,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Coraline",
+      "tradeAmountUSD": 0.0999717
+    },
+    {
+      "timestamp": "2025-08-13T15:23:47.000Z",
+      "time": "16:23:47",
+      "contracts": 15.816847,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x6f578eEf503773F3b840801A2Af464703e0BAd64",
+      "tradeAmountUSD": 6.998018999999999
+    },
+    {
+      "timestamp": "2025-08-13T15:24:37.000Z",
+      "time": "16:24:37",
+      "contracts": 9.874392,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x64bAC0FC115Ef0bb3e49EAcafE89a8404Dbb4c8a",
+      "tradeAmountUSD": 4.998585
+    },
+    {
+      "timestamp": "2025-08-13T15:30:11.000Z",
+      "time": "16:30:11",
+      "contracts": 10.067848,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998595
+    },
+    {
+      "timestamp": "2025-08-13T15:30:31.000Z",
+      "time": "16:30:31",
+      "contracts": 10.067849,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.973634016008
+    },
+    {
+      "timestamp": "2025-08-13T15:30:37.000Z",
+      "time": "16:30:37",
+      "contracts": 9.034725,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x8a1F050b9D78416206d8c51bcF3c4E92EbFf91c7",
+      "tradeAmountUSD": 4.998595
+    },
+    {
+      "timestamp": "2025-08-13T15:30:49.000Z",
+      "time": "16:30:49",
+      "contracts": 11.013451,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998595
+    },
+    {
+      "timestamp": "2025-08-13T15:31:11.000Z",
+      "time": "16:31:11",
+      "contracts": 2.055628,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "Tlingg",
+      "tradeAmountUSD": 0.999719
+    },
+    {
+      "timestamp": "2025-08-13T15:31:59.000Z",
+      "time": "16:31:59",
+      "contracts": 3.987186,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 1.999438
+    },
+    {
+      "timestamp": "2025-08-13T15:32:09.000Z",
+      "time": "16:32:09",
+      "contracts": 9.347298,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "bliss",
+      "tradeAmountUSD": 4.998595
+    },
+    {
+      "timestamp": "2025-08-13T15:33:03.000Z",
+      "time": "16:33:03",
+      "contracts": 3.660927,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -1.999438
+    },
+    {
+      "timestamp": "2025-08-13T15:34:01.000Z",
+      "time": "16:34:01",
+      "contracts": 11.339711,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -5.771550612256
+    },
+    {
+      "timestamp": "2025-08-13T15:37:15.000Z",
+      "time": "16:37:15",
+      "contracts": 1.908388,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Tlingg",
+      "tradeAmountUSD": 0.999772
+    },
+    {
+      "timestamp": "2025-08-13T15:37:15.000Z",
+      "time": "16:37:15",
+      "contracts": 17.492349,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x4d60cd0F643566c1aa7C1616cFB4464c7aBde830",
+      "tradeAmountUSD": 9.99772
+    },
+    {
+      "timestamp": "2025-08-13T15:38:01.000Z",
+      "time": "16:38:01",
+      "contracts": 0.162882,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xD067...76f8",
+      "tradeAmountUSD": 0.0999772
+    },
+    {
+      "timestamp": "2025-08-13T15:38:29.000Z",
+      "time": "16:38:29",
+      "contracts": 67.453022,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x4d60cd0F643566c1aa7C1616cFB4464c7aBde830",
+      "tradeAmountUSD": 49.9886
+    },
+    {
+      "timestamp": "2025-08-13T15:39:09.000Z",
+      "time": "16:39:09",
+      "contracts": 0.11934,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "SATOSHIANAKONDO",
+      "tradeAmountUSD": 0.0999772
+    },
+    {
+      "timestamp": "2025-08-13T15:39:33.000Z",
+      "time": "16:39:33",
+      "contracts": 25.733189,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.99886
+    },
+    {
+      "timestamp": "2025-08-13T15:40:05.000Z",
+      "time": "16:40:05",
+      "contracts": 25.733185,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.9738966929320005
+    },
+    {
+      "timestamp": "2025-08-13T15:40:49.000Z",
+      "time": "16:40:49",
+      "contracts": 34.566483,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x59c530055DAAf3Bc8216570897D0957481319ae4",
+      "tradeAmountUSD": 29.99214
+    },
+    {
+      "timestamp": "2025-08-13T15:41:03.000Z",
+      "time": "16:41:03",
+      "contracts": 36.648743,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.99869
+    },
+    {
+      "timestamp": "2025-08-13T15:42:01.000Z",
+      "time": "16:42:01",
+      "contracts": 36.648735,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.9737275418780005
+    },
+    {
+      "timestamp": "2025-08-13T15:43:11.000Z",
+      "time": "16:43:11",
+      "contracts": 27.540305,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x7079694755bB8bFDbCF1a98900FE5e299a126643",
+      "tradeAmountUSD": 24.99345
+    },
+    {
+      "timestamp": "2025-08-13T15:43:17.000Z",
+      "time": "16:43:17",
+      "contracts": 1.085609,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xE6d79731bDBb20C3bA0Ca83aD50B049Bb0db0d0a",
+      "tradeAmountUSD": 0.999738
+    },
+    {
+      "timestamp": "2025-08-13T15:44:11.000Z",
+      "time": "16:44:11",
+      "contracts": 1.228148,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0xA2857232F19D16D3675824C884bfe2E71d72d7cE",
+      "tradeAmountUSD": 0.09997160000000001
+    },
+    {
+      "timestamp": "2025-08-13T15:44:47.000Z",
+      "time": "16:44:47",
+      "contracts": 10.812857,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Rogue",
+      "tradeAmountUSD": 9.997160000000001
+    },
+    {
+      "timestamp": "2025-08-13T15:45:27.000Z",
+      "time": "16:45:27",
+      "contracts": 21.371851,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xF8a41aFc474FD2299e66F4A6cE1019bd2e1866E1",
+      "tradeAmountUSD": 19.994320000000002
+    },
+    {
+      "timestamp": "2025-08-13T15:46:07.000Z",
+      "time": "16:46:07",
+      "contracts": 4.240588,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xFEc4050Eedabc2E5b421744c75748DC97f10Fec0",
+      "tradeAmountUSD": 3.998864
+    },
+    {
+      "timestamp": "2025-08-13T15:46:09.000Z",
+      "time": "16:46:09",
+      "contracts": 56.230711,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "Crypto Tariqul",
+      "tradeAmountUSD": -51.780168254648
+    },
+    {
+      "timestamp": "2025-08-13T15:47:29.000Z",
+      "time": "16:47:29",
+      "contracts": 220.647774,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Kryptdip",
+      "tradeAmountUSD": 211.33996240000002
+    },
+    {
+      "timestamp": "2025-08-13T15:48:19.000Z",
+      "time": "16:48:19",
+      "contracts": 46.323143,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 0.999716
+    },
+    {
+      "timestamp": "2025-08-13T15:48:37.000Z",
+      "time": "16:48:37",
+      "contracts": 36.19771,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "tradeAmountUSD": 0.999716
+    },
+    {
+      "timestamp": "2025-08-13T15:48:57.000Z",
+      "time": "16:48:57",
+      "contracts": 105.304536,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0xht9",
+      "tradeAmountUSD": 4.9985800000000005
+    },
+    {
+      "timestamp": "2025-08-13T15:48:59.000Z",
+      "time": "16:48:59",
+      "contracts": 18.787835,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -1.2352970759680002
+    },
+    {
+      "timestamp": "2025-08-13T15:49:15.000Z",
+      "time": "16:49:15",
+      "contracts": 27.535293,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -1.475804752384
+    },
+    {
+      "timestamp": "2025-08-13T15:49:47.000Z",
+      "time": "16:49:47",
+      "contracts": 50.062843,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 2.999148
+    },
+    {
+      "timestamp": "2025-08-13T15:50:15.000Z",
+      "time": "16:50:15",
+      "contracts": 31.985763,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "tradeAmountUSD": 29.991480000000003
+    },
+    {
+      "timestamp": "2025-08-13T15:50:57.000Z",
+      "time": "16:50:57",
+      "contracts": 43.770351,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 2.999148
+    },
+    {
+      "timestamp": "2025-08-13T15:51:15.000Z",
+      "time": "16:51:15",
+      "contracts": 44.040815,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -2.999148
+    },
+    {
+      "timestamp": "2025-08-13T15:52:27.000Z",
+      "time": "16:52:27",
+      "contracts": 49.792398,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -2.261853451136
+    },
+    {
+      "timestamp": "2025-08-13T15:53:31.000Z",
+      "time": "16:53:31",
+      "contracts": 24.346565,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 0.999716
+    },
+    {
+      "timestamp": "2025-08-13T15:53:43.000Z",
+      "time": "16:53:43",
+      "contracts": 77.601703,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.9985800000000005
+    },
+    {
+      "timestamp": "2025-08-13T15:53:59.000Z",
+      "time": "16:53:59",
+      "contracts": 42.812317,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998875
+    },
+    {
+      "timestamp": "2025-08-13T15:54:13.000Z",
+      "time": "16:54:13",
+      "contracts": 28.192627,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998875
+    },
+    {
+      "timestamp": "2025-08-13T15:54:39.000Z",
+      "time": "16:54:39",
+      "contracts": 20.676192,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.998875
+    },
+    {
+      "timestamp": "2025-08-13T15:54:57.000Z",
+      "time": "16:54:57",
+      "contracts": 25.720525,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -5.99865
+    },
+    {
+      "timestamp": "2025-08-13T15:55:33.000Z",
+      "time": "16:55:33",
+      "contracts": 6.154845,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xDd36D05641554cbA011c9D603652691211B0624f",
+      "tradeAmountUSD": 4.998875
+    },
+    {
+      "timestamp": "2025-08-13T15:55:49.000Z",
+      "time": "16:55:49",
+      "contracts": 33.544013,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.998875
+    },
+    {
+      "timestamp": "2025-08-13T15:56:35.000Z",
+      "time": "16:56:35",
+      "contracts": 2.26705,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x2b2cA9d399919505D05107579D7984Cf613575d3",
+      "tradeAmountUSD": 1.99955
+    },
+    {
+      "timestamp": "2025-08-13T15:56:37.000Z",
+      "time": "16:56:37",
+      "contracts": 22.288659,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xA91fA67bDE2b2fF31e91Ee6B7a60961488aBA2Cb",
+      "tradeAmountUSD": 19.9955
+    },
+    {
+      "timestamp": "2025-08-13T15:57:19.000Z",
+      "time": "16:57:19",
+      "contracts": 134.364858,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -7.153383130548
+    },
+    {
+      "timestamp": "2025-08-13T15:57:35.000Z",
+      "time": "16:57:35",
+      "contracts": 107.430035,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 4.999035
+    },
+    {
+      "timestamp": "2025-08-13T15:57:49.000Z",
+      "time": "16:57:49",
+      "contracts": 26.39705,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xB650e795fbBbe90E7fC5aefBFfC518F1B973445f",
+      "tradeAmountUSD": 24.7952136
+    },
+    {
+      "timestamp": "2025-08-13T15:58:47.000Z",
+      "time": "16:58:47",
+      "contracts": 107.430039,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": -4.049357323173
+    },
+    {
+      "timestamp": "2025-08-13T15:59:11.000Z",
+      "time": "16:59:11",
+      "contracts": 21.358444,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "tradeAmountUSD": 20.895966299999998
+    },
+    {
+      "timestamp": "2025-08-13T15:59:13.000Z",
+      "time": "16:59:13",
+      "contracts": 22.185971,
+      "direction": "YES",
+      "strategy": "Sell",
+      "trader": "0xA91fA67bDE2b2fF31e91Ee6B7a60961488aBA2Cb",
+      "tradeAmountUSD": -21.595831200000003
+    },
+    {
+      "timestamp": "2025-08-13T15:59:13.000Z",
+      "time": "16:59:13",
+      "contracts": 35.603219,
+      "direction": "NO",
+      "strategy": "Sell",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "tradeAmountUSD": -0.819364832061
+    },
+    {
+      "timestamp": "2025-08-13T15:59:19.000Z",
+      "time": "16:59:19",
+      "contracts": 11.503406,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Tlingg",
+      "tradeAmountUSD": 11.2978191
+    },
+    {
+      "timestamp": "2025-08-13T15:59:29.000Z",
+      "time": "16:59:29",
+      "contracts": 199.827632,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "PHILARMONIA",
+      "tradeAmountUSD": 197.7618246
+    },
+    {
+      "timestamp": "2025-08-13T15:59:37.000Z",
+      "time": "16:59:37",
+      "contracts": 281.723744,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x8e8AdEB64BCd257Fdd83645296045094d0CC1845",
+      "tradeAmountUSD": 280.8457863
+    },
+    {
+      "timestamp": "2025-08-13T15:59:43.000Z",
+      "time": "16:59:43",
+      "contracts": 36.43466,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x6e8226c519317714E0246cD5d2D69AD2cbCde82F",
+      "tradeAmountUSD": 36.3929748
+    },
+    {
+      "timestamp": "2025-08-13T15:59:47.000Z",
+      "time": "16:59:47",
+      "contracts": 29.172634,
+      "direction": "NO",
+      "strategy": "Buy",
+      "trader": "Tlingg",
+      "tradeAmountUSD": 0.0999807
+    },
+    {
+      "timestamp": "2025-08-13T15:59:53.000Z",
+      "time": "16:59:53",
+      "contracts": 188.266255,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "tradeAmountUSD": 188.26365810000001
+    },
+    {
+      "timestamp": "2025-08-13T15:59:53.000Z",
+      "time": "16:59:53",
+      "contracts": 108.068921,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "siqhenz",
+      "tradeAmountUSD": 107.979156
+    },
+    {
+      "timestamp": "2025-08-13T15:59:55.000Z",
+      "time": "16:59:55",
+      "contracts": 571.20729,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "Rogue",
+      "tradeAmountUSD": 571.7896233
+    },
+    {
+      "timestamp": "2025-08-13T16:00:01.000Z",
+      "time": "17:00:01",
+      "contracts": 9.843757,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "JAHAN ALVEE",
+      "tradeAmountUSD": 9.858097019999999
+    },
+    {
+      "timestamp": "2025-08-13T16:00:07.000Z",
+      "time": "17:00:07",
+      "contracts": 132.472692,
+      "direction": "YES",
+      "strategy": "Buy",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "tradeAmountUSD": 132.6743889
+    }
+  ]
+}

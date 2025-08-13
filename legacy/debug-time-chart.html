@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Time Navigation Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug-info { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .controls { margin: 20px 0; }
+        button { margin: 5px; padding: 10px 15px; }
+        #chart-container { width: 100%; height: 400px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Debug: Time Navigation Issue</h1>
+    
+    <div class="debug-info">
+        <strong>Current Settings:</strong><br>
+        Preset: <span id="currentPreset">1h</span><br>
+        Position: <span id="currentPosition">0</span><br>
+        Window: <span id="currentWindow">Loading...</span><br>
+        Data Points: <span id="dataPoints">0</span>
+    </div>
+    
+    <div class="controls">
+        <button onclick="setPreset('1h')">1 Hour</button>
+        <button onclick="setPreset('30min')">30 Minutes</button>
+        <button onclick="setPreset('5min')">5 Minutes</button>
+        <br>
+        <button onclick="navigate(-1)">◀ Previous</button>
+        <button onclick="navigate(1)">Next ▶</button>
+    </div>
+    
+    <div id="chart-container">
+        <canvas id="debugChart"></canvas>
+    </div>
+    
+    <div class="debug-info" id="logOutput">
+        <strong>Debug Log:</strong><br>
+        <div id="logContent"></div>
+    </div>
+
+    <script>
+        let chart = null;
+        let currentPreset = '1h';
+        let currentPosition = 0;
+        let maxPositions = 1;
+        
+        // Simple test data
+        const testData = [];
+        const baseTime = new Date('2025-08-13T16:00:00Z');
+        for (let i = 0; i <= 60; i++) {
+            testData.push({
+                x: new Date(baseTime.getTime() + i * 60000),
+                y: 0.241000 + Math.sin(i / 10) * 0.001 + Math.random() * 0.0002
+            });
+        }
+        
+        function log(message) {
+            const logContent = document.getElementById('logContent');
+            logContent.innerHTML = new Date().toLocaleTimeString() + ': ' + message + '<br>' + logContent.innerHTML;
+            console.log(message);
+        }
+        
+        function updateDebugInfo() {
+            document.getElementById('currentPreset').textContent = currentPreset;
+            document.getElementById('currentPosition').textContent = currentPosition;
+            
+            const { windowStart, windowEnd } = getTimeWindow();
+            document.getElementById('currentWindow').textContent = 
+                `${windowStart.toISOString().substr(11, 5)} - ${windowEnd.toISOString().substr(11, 5)}`;
+            
+            const filteredData = testData.filter(p => p.x >= windowStart && p.x <= windowEnd);
+            document.getElementById('dataPoints').textContent = filteredData.length;
+        }
+        
+        function getTimeWindow() {
+            const baseStart = new Date('2025-08-13T16:00:00Z');
+            const baseEnd = new Date('2025-08-13T17:00:00Z');
+            
+            let windowStart, windowEnd;
+            
+            switch(currentPreset) {
+                case '1h':
+                    windowStart = baseStart;
+                    windowEnd = baseEnd;
+                    break;
+                case '30min':
+                    windowStart = new Date(baseStart.getTime() + currentPosition * 30 * 60000);
+                    windowEnd = new Date(windowStart.getTime() + 30 * 60000);
+                    if (windowEnd > baseEnd) {
+                        windowEnd = baseEnd;
+                        windowStart = new Date(windowEnd.getTime() - 30 * 60000);
+                    }
+                    break;
+                case '5min':
+                    windowStart = new Date(baseStart.getTime() + currentPosition * 5 * 60000);
+                    windowEnd = new Date(windowStart.getTime() + 5 * 60000);
+                    if (windowEnd > baseEnd) {
+                        windowEnd = baseEnd;
+                        windowStart = new Date(windowEnd.getTime() - 5 * 60000);
+                    }
+                    break;
+            }
+            
+            log(`Time window calculated: ${windowStart.toISOString().substr(11, 5)} - ${windowEnd.toISOString().substr(11, 5)}`);
+            return { windowStart, windowEnd };
+        }
+        
+        function setPreset(preset) {
+            log(`Setting preset to: ${preset}`);
+            currentPreset = preset;
+            currentPosition = 0;
+            
+            switch(preset) {
+                case '1h': maxPositions = 1; break;
+                case '30min': maxPositions = 2; break;
+                case '5min': maxPositions = 12; break;
+            }
+            
+            updateChart();
+        }
+        
+        function navigate(direction) {
+            const newPosition = currentPosition + direction;
+            log(`Navigation: ${currentPosition} -> ${newPosition} (max: ${maxPositions})`);
+            
+            if (newPosition >= 0 && newPosition < maxPositions) {
+                currentPosition = newPosition;
+                updateChart();
+            } else {
+                log(`Navigation blocked: out of range`);
+            }
+        }
+        
+        function updateChart() {
+            const { windowStart, windowEnd } = getTimeWindow();
+            
+            // Filter data
+            const filteredData = testData.filter(p => p.x >= windowStart && p.x <= windowEnd);
+            log(`Filtered data: ${filteredData.length} points`);
+            
+            // Update chart data
+            chart.data.datasets[0].data = filteredData;
+            
+            // Update scales
+            chart.options.scales.x.min = windowStart;
+            chart.options.scales.x.max = windowEnd;
+            
+            log(`Updating chart scales: X from ${windowStart.toISOString().substr(11, 5)} to ${windowEnd.toISOString().substr(11, 5)}`);
+            
+            // Force update
+            chart.update('resize');
+            
+            updateDebugInfo();
+        }
+        
+        // Initialize chart
+        const ctx = document.getElementById('debugChart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Test Data',
+                    data: testData,
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'minute',
+                            displayFormats: {
+                                minute: 'HH:mm'
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Test Value'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Initial setup
+        updateDebugInfo();
+        log('Debug chart initialized');
+    </script>
+</body>
+</html>

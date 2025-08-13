@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGE Price Chart - Limitless Exchange Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .target-line {
+            background: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .target-line strong {
+            color: #28a745;
+            font-size: 1.2em;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin-bottom: 30px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            color: #495057;
+        }
+        .stat-card .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .trade-info {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .trade-info h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        .price-above { background-color: #28a745; }
+        .target-line-color { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐕 DOGE Price Analysis</h1>
+            <p>Real-time price movements during Limitless Exchange trading session</p>
+            <p><strong>August 13, 2025 • 16:00-17:00 UTC</strong></p>
+        </div>
+
+        <div class="target-line">
+            <strong>🎯 Target Price: $0.24072</strong>
+            <span style="margin-left: 20px;">Market bet: Will DOGE be above this price at 16:00 UTC?</span>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color price-above"></div>
+                <span>DOGE Price (Pyth Network)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color target-line-color"></div>
+                <span>Target Price ($0.24072)</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="priceChart"></canvas>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Result</h3>
+                <div class="value" style="color: #28a745;">✅ YES WINS</div>
+            </div>
+            <div class="stat-card">
+                <h3>Final Price</h3>
+                <div class="value">$0.241238</div>
+            </div>
+            <div class="stat-card">
+                <h3>Above Target</h3>
+                <div class="value" style="color: #28a745;">+$0.000518</div>
+            </div>
+            <div class="stat-card">
+                <h3>Market Volume</h3>
+                <div class="value">$2,386</div>
+            </div>
+        </div>
+
+        <div class="trade-info">
+            <h3>📊 Trading Analysis</h3>
+            <p><strong>Total Trades:</strong> 88 trades from 39 unique traders</p>
+            <p><strong>Biggest Bet:</strong> Rogue with 571.2 contracts on YES (✅ Correct!)</p>
+            <p><strong>Market Sentiment:</strong> 91.7% YES volume vs 8.3% NO volume</p>
+            <p><strong>Price Range:</strong> $0.2414 - $0.2426 (consistently above target)</p>
+            <p><strong>Trader Accuracy:</strong> YES bettors were completely correct - DOGE stayed above $0.24072 throughout the entire session!</p>
+        </div>
+    </div>
+
+    <script>
+        // Real DOGE price data from Pyth Network
+        const priceData = [
+            { time: '16:03:29', price: 0.241441, timestamp: new Date('2025-08-13T16:03:29Z') },
+            { time: '16:43:17', price: 0.242606, timestamp: new Date('2025-08-13T16:43:17Z') },
+            { time: '16:47:29', price: 0.241832, timestamp: new Date('2025-08-13T16:47:29Z') },
+            { time: '16:48:57', price: 0.241990, timestamp: new Date('2025-08-13T16:48:57Z') },
+            { time: '17:00:07', price: 0.241489, timestamp: new Date('2025-08-13T17:00:07Z') }
+        ];
+
+        const targetPrice = 0.24072;
+        const marketResolution = 0.241238;
+
+        // Prepare chart data
+        const labels = priceData.map(d => d.time);
+        const prices = priceData.map(d => d.price);
+        
+        // Create target line data (same length as price data)
+        const targetLine = priceData.map(() => targetPrice);
+        const resolutionLine = priceData.map(() => marketResolution);
+
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'DOGE Price (Pyth)',
+                        data: prices,
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        borderWidth: 4,
+                        pointRadius: 8,
+                        pointBackgroundColor: '#28a745',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Target Price ($0.24072)',
+                        data: targetLine,
+                        borderColor: '#dc3545',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        borderDash: [10, 5],
+                        pointRadius: 0,
+                        tension: 0
+                    },
+                    {
+                        label: 'Market Resolution ($0.241238)',
+                        data: resolutionLine,
+                        borderColor: '#fd7e14',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [5, 3],
+                        pointRadius: 0,
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'DOGE Price Movement During Trading Session',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        padding: 20
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                if (context.datasetIndex === 0) {
+                                    const price = context.parsed.y;
+                                    const diff = price - targetPrice;
+                                    const status = diff > 0 ? '🟢 ABOVE' : '🔴 BELOW';
+                                    return `DOGE: $${price.toFixed(6)} (${status} target by $${Math.abs(diff).toFixed(6)})`;
+                                }
+                                return context.dataset.label + ': $' + context.parsed.y.toFixed(6);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price (USD)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        beginAtZero: false,
+                        min: 0.2405,
+                        max: 0.2430,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return '$' + value.toFixed(6);
+                            },
+                            font: {
+                                size: 11
+                            }
+                        },
+                        grid: {
+                            color: '#e9ecef'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (UTC)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
+                        },
+                        grid: {
+                            color: '#e9ecef'
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+
+        // Add some dynamic behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate the chart on load
+            setTimeout(() => {
+                chart.update();
+            }, 500);
+        });
+
+        // Add click handler for data points
+        document.getElementById('priceChart').onclick = function(evt) {
+            const points = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+            
+            if (points.length) {
+                const firstPoint = points[0];
+                const datasetIndex = firstPoint.datasetIndex;
+                const index = firstPoint.index;
+                
+                if (datasetIndex === 0) { // Only for price data
+                    const dataPoint = priceData[index];
+                    const diff = dataPoint.price - targetPrice;
+                    const status = diff > 0 ? 'ABOVE ✅' : 'BELOW ❌';
+                    
+                    alert(`Time: ${dataPoint.time}
+Price: $${dataPoint.price.toFixed(6)}
+Target: $${targetPrice.toFixed(6)}
+Difference: $${diff.toFixed(6)}
+Status: ${status} target`);
+                }
+            }
+        };
+    </script>
+</body>
+</html>

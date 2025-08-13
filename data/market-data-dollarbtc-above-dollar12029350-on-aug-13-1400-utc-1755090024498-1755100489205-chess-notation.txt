@@ -1,0 +1,20 @@
+BTC Market Trading Game: $120,293.50 Prediction
+══════════════════════════════════════════════════
+
+CHESS NOTATION:
+1.♔YES++$10.00@0.95↗️ ♕YES+$7.95@0.795➡️
+2.♖NO++$1.71@0.19↘️ ♗YES++$7.55@0.839↗️
+3.♘YES++$5.00@0.95↗️ ♗YES++$3.55@0.963↗️
+4.♗YES++$5.11@0.963↗️ ♙NO$50.74@0.314165↘️
+5.♚YES+$7.00@0.795➡️
+
+LEGEND:
+♔♕♖♗♘♙ = Different traders
+YES++ = Strong YES bet (price ≥ 0.8)
+YES+  = Moderate YES bet (price ≥ 0.6)
+YES   = Weak YES bet (price ≥ 0.4)
+NO    = Weak NO bet (price ≥ 0.2)
+NO++  = Strong NO bet (price < 0.2)
+$X.XX = Trade amount in USDC
+@X.XX = Execution price
+↗️➡️↘️ = Price trend indicators

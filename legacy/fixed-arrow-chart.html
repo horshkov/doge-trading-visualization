@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGE Trading Chart - Fixed Arrow Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .info-card {
+            background: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .info-card.target { border-color: #dc3545; }
+        .info-card.resolution { border-color: #fd7e14; }
+        .info-card.trades { border-color: #007bff; }
+        .info-card strong {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .target { color: #dc3545; }
+        .resolution { color: #fd7e14; }
+        .result { color: #28a745; }
+        .trades { color: #007bff; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            margin-bottom: 30px;
+        }
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .legend-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .legend-section h4 {
+            margin: 0 0 10px 0;
+            color: #495057;
+            text-align: center;
+        }
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px;
+        }
+        .legend-symbol {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 14px;
+            border: 2px solid white;
+        }
+        .buy-yes { background-color: #28a745; }
+        .sell-yes { background-color: #dc3545; }
+        .buy-no { background-color: #28a745; }
+        .sell-no { background-color: #dc3545; }
+        .price-line-legend { 
+            background-color: #28a745; 
+            height: 3px; 
+            border-radius: 2px; 
+            width: 20px;
+        }
+        .target-line-legend { 
+            background-color: #dc3545; 
+            height: 2px; 
+            border-radius: 1px; 
+            width: 20px;
+            border: 1px dashed #dc3545;
+        }
+        .trade-summary {
+            background: #e9ecef;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+        .trade-summary h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        .trade-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-item .number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stat-item .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .highlight-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐕 DOGE Trading Analysis - Fixed Arrow Visualization</h1>
+            <p>All 88 trades with visible directional arrows positioned on price line</p>
+            <p><strong>August 13, 2025 • 16:00-17:00 UTC</strong></p>
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card target">
+                <strong class="target">🎯 Target Price</strong>
+                <span>$0.24072</span>
+            </div>
+            <div class="info-card resolution">
+                <strong class="resolution">📊 Resolution</strong>
+                <span>$0.241238</span>
+            </div>
+            <div class="info-card">
+                <strong class="result">✅ Result</strong>
+                <span>YES WINS!</span>
+            </div>
+            <div class="info-card trades">
+                <strong class="trades">📈 Total Trades</strong>
+                <span>88 trades mapped</span>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-section">
+                <h4>Trade Types</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-symbol buy-yes">↑</div>
+                        <span>BUY YES (Green ↑)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol sell-yes">↑</div>
+                        <span>SELL YES (Red ↑)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol buy-no">↓</div>
+                        <span>BUY NO (Green ↓)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol sell-no">↓</div>
+                        <span>SELL NO (Red ↓)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-section">
+                <h4>Chart Elements</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="price-line-legend"></div>
+                        <span>DOGE Price Line</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="target-line-legend"></div>
+                        <span>Target Price ($0.24072)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="fixedArrowChart"></canvas>
+        </div>
+
+        <div class="trade-summary">
+            <h3>📊 Directional Trading Analysis</h3>
+            
+            <div class="trade-stats">
+                <div class="stat-item">
+                    <div class="number" id="buyYesCount">0</div>
+                    <div class="label">BUY YES (Green ↑)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" id="sellYesCount">0</div>
+                    <div class="label">SELL YES (Red ↑)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" id="buyNoCount">0</div>
+                    <div class="label">BUY NO (Green ↓)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" id="sellNoCount">0</div>
+                    <div class="label">SELL NO (Red ↓)</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Arrow Legend:</strong>
+                <ul>
+                    <li><strong>Green Circle (↑):</strong> Buying YES position - betting price will be above target</li>
+                    <li><strong>Red Circle (↑):</strong> Selling YES position - taking profits on YES bet</li>
+                    <li><strong>Green Circle (↓):</strong> Buying NO position - betting price will be below target</li>
+                    <li><strong>Red Circle (↓):</strong> Selling NO position - taking profits on NO bet</li>
+                    <li><strong>Circle Size:</strong> Larger circles = bigger contract positions</li>
+                </ul>
+            </div>
+
+            <p><strong>Positioning:</strong> All trade circles are now positioned directly on or near the DOGE price line at the exact time of each trade, making it easy to see the price context when each decision was made.</p>
+        </div>
+    </div>
+
+    <script>
+        // All trades data
+        const allTrades = [
+            { time: '16:03:29', contracts: 2.0, direction: 'YES', strategy: 'BUY', trader: 'Tlingg', size: 'small' },
+            { time: '16:04:25', contracts: 4.0, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:04:47', contracts: 33.7, direction: 'NO', strategy: 'BUY', trader: 'EL CERTIFIED', size: 'medium' },
+            { time: '16:05:19', contracts: 25.6, direction: 'YES', strategy: 'BUY', trader: '0x213f...A08E', size: 'medium' },
+            { time: '16:05:27', contracts: 10.5, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:05:41', contracts: 10.5, direction: 'YES', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:05:43', contracts: 2.2, direction: 'YES', strategy: 'BUY', trader: '0xDc0e...8530', size: 'small' },
+            { time: '16:05:53', contracts: 10.3, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:06:07', contracts: 4.0, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:08:21', contracts: 10.3, direction: 'YES', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:09:35', contracts: 31.8, direction: 'NO', strategy: 'BUY', trader: 'ChaJungKyu', size: 'medium' },
+            { time: '16:09:57', contracts: 19.5, direction: 'NO', strategy: 'BUY', trader: '0x034C...6B6A', size: 'small' },
+            { time: '16:10:59', contracts: 1.9, direction: 'YES', strategy: 'BUY', trader: 'Jiwoin', size: 'small' },
+            { time: '16:11:13', contracts: 3.7, direction: 'YES', strategy: 'BUY', trader: 'Tiep05', size: 'small' },
+            { time: '16:11:39', contracts: 16.2, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:15:41', contracts: 28.0, direction: 'NO', strategy: 'BUY', trader: '0x8074...8a79', size: 'medium' },
+            { time: '16:16:37', contracts: 18.5, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:17:27', contracts: 57.6, direction: 'YES', strategy: 'BUY', trader: 'Crypto Tariqul', size: 'medium' },
+            { time: '16:17:57', contracts: 34.7, direction: 'YES', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:18:33', contracts: 11.6, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:19:29', contracts: 11.6, direction: 'YES', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:23:41', contracts: 0.2, direction: 'YES', strategy: 'BUY', trader: 'Coraline', size: 'small' },
+            { time: '16:23:47', contracts: 15.8, direction: 'YES', strategy: 'BUY', trader: '0x6f57...Ad64', size: 'small' },
+            { time: '16:24:37', contracts: 9.9, direction: 'YES', strategy: 'BUY', trader: '0x64bA...4c8a', size: 'small' },
+            { time: '16:30:11', contracts: 10.1, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:30:31', contracts: 10.1, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:30:37', contracts: 9.0, direction: 'YES', strategy: 'BUY', trader: '0x8a1F...91c7', size: 'small' },
+            { time: '16:30:49', contracts: 11.0, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:31:11', contracts: 2.1, direction: 'NO', strategy: 'BUY', trader: 'Tlingg', size: 'small' },
+            { time: '16:31:59', contracts: 4.0, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:32:09', contracts: 9.3, direction: 'NO', strategy: 'BUY', trader: 'bliss', size: 'small' },
+            { time: '16:33:03', contracts: 3.7, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:34:01', contracts: 11.3, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:37:15', contracts: 1.9, direction: 'YES', strategy: 'BUY', trader: 'Tlingg', size: 'small' },
+            { time: '16:37:15', contracts: 17.5, direction: 'YES', strategy: 'BUY', trader: '0x4d60...e830', size: 'small' },
+            { time: '16:38:01', contracts: 0.2, direction: 'YES', strategy: 'BUY', trader: '0xD067...76f8', size: 'small' },
+            { time: '16:38:29', contracts: 67.5, direction: 'YES', strategy: 'BUY', trader: '0x4d60...e830', size: 'large' },
+            { time: '16:39:09', contracts: 0.1, direction: 'YES', strategy: 'BUY', trader: 'SATOSHIANAKONDO', size: 'small' },
+            { time: '16:39:33', contracts: 25.7, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:40:05', contracts: 25.7, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:40:49', contracts: 34.6, direction: 'YES', strategy: 'BUY', trader: '0x59c5...9ae4', size: 'medium' },
+            { time: '16:41:03', contracts: 36.6, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:42:01', contracts: 36.6, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:43:11', contracts: 27.5, direction: 'YES', strategy: 'BUY', trader: '0x7079...6643', size: 'medium' },
+            { time: '16:43:17', contracts: 1.1, direction: 'YES', strategy: 'BUY', trader: '0xE6d7...0d0a', size: 'small' },
+            { time: '16:44:11', contracts: 1.2, direction: 'NO', strategy: 'BUY', trader: 'Mrravaleth', size: 'small' },
+            { time: '16:44:47', contracts: 10.8, direction: 'YES', strategy: 'BUY', trader: 'Rogue', size: 'small' },
+            { time: '16:45:27', contracts: 21.4, direction: 'YES', strategy: 'BUY', trader: 'letsgo', size: 'small' },
+            { time: '16:46:07', contracts: 4.2, direction: 'YES', strategy: 'BUY', trader: '0xFEc4...Fec0', size: 'small' },
+            { time: '16:46:09', contracts: 56.2, direction: 'YES', strategy: 'SELL', trader: 'Crypto Tariqul', size: 'medium' },
+            { time: '16:47:29', contracts: 220.6, direction: 'YES', strategy: 'BUY', trader: 'Kryptdip', size: 'huge' },
+            { time: '16:48:19', contracts: 46.3, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:48:37', contracts: 36.2, direction: 'NO', strategy: 'BUY', trader: '0xddCa...5E34', size: 'medium' },
+            { time: '16:48:57', contracts: 105.3, direction: 'NO', strategy: 'BUY', trader: '0xht9', size: 'large' },
+            { time: '16:48:59', contracts: 18.8, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:49:15', contracts: 27.5, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:49:47', contracts: 50.1, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:50:15', contracts: 32.0, direction: 'YES', strategy: 'BUY', trader: '0xddCa...5E34', size: 'medium' },
+            { time: '16:50:57', contracts: 43.8, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:51:15', contracts: 44.0, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:52:27', contracts: 49.8, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:53:31', contracts: 24.3, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:53:43', contracts: 77.6, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'large' },
+            { time: '16:53:59', contracts: 42.8, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:54:13', contracts: 28.2, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:54:39', contracts: 20.7, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'small' },
+            { time: '16:54:57', contracts: 25.7, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:55:33', contracts: 6.2, direction: 'YES', strategy: 'BUY', trader: '0xDd36...624f', size: 'small' },
+            { time: '16:55:49', contracts: 33.5, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'medium' },
+            { time: '16:56:35', contracts: 2.3, direction: 'YES', strategy: 'BUY', trader: '0x2b2c...75d3', size: 'small' },
+            { time: '16:56:37', contracts: 22.3, direction: 'YES', strategy: 'BUY', trader: '0xA91f...A2Cb', size: 'small' },
+            { time: '16:57:19', contracts: 134.4, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'huge' },
+            { time: '16:57:35', contracts: 107.4, direction: 'NO', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'large' },
+            { time: '16:57:49', contracts: 26.4, direction: 'YES', strategy: 'BUY', trader: '0xB650...445f', size: 'medium' },
+            { time: '16:58:47', contracts: 107.4, direction: 'NO', strategy: 'SELL', trader: '0x3f45...C6EC', size: 'large' },
+            { time: '16:59:11', contracts: 21.4, direction: 'YES', strategy: 'BUY', trader: '0xDc0e...8530', size: 'small' },
+            { time: '16:59:13', contracts: 22.2, direction: 'YES', strategy: 'SELL', trader: '0xA91f...A2Cb', size: 'small' },
+            { time: '16:59:13', contracts: 35.6, direction: 'NO', strategy: 'SELL', trader: '0xddCa...5E34', size: 'medium' },
+            { time: '16:59:19', contracts: 11.5, direction: 'YES', strategy: 'BUY', trader: 'Tlingg', size: 'small' },
+            { time: '16:59:29', contracts: 199.8, direction: 'YES', strategy: 'BUY', trader: 'PHILARMONIA', size: 'huge' },
+            { time: '16:59:37', contracts: 281.7, direction: 'YES', strategy: 'BUY', trader: '0x8e8A...1845', size: 'huge' },
+            { time: '16:59:43', contracts: 36.4, direction: 'YES', strategy: 'BUY', trader: '0x6e82...e82F', size: 'medium' },
+            { time: '16:59:47', contracts: 29.2, direction: 'NO', strategy: 'BUY', trader: 'Tlingg', size: 'medium' },
+            { time: '16:59:53', contracts: 188.3, direction: 'YES', strategy: 'BUY', trader: '0xDc0e...8530', size: 'huge' },
+            { time: '16:59:53', contracts: 108.1, direction: 'YES', strategy: 'BUY', trader: 'siqhenz', size: 'large' },
+            { time: '16:59:55', contracts: 571.2, direction: 'YES', strategy: 'BUY', trader: 'Rogue', size: 'legendary' },
+            { time: '17:00:01', contracts: 9.8, direction: 'YES', strategy: 'BUY', trader: 'JAHAN ALVEE', size: 'small' },
+            { time: '17:00:07', contracts: 132.5, direction: 'YES', strategy: 'BUY', trader: '0x3f45...C6EC', size: 'huge' }
+        ];
+
+        // Generate price data
+        function generatePriceData() {
+            const data = [];
+            const startTime = new Date('2025-08-13T16:00:00Z');
+            const targetPrice = 0.24072;
+            
+            const knownPoints = [
+                { minute: 3, price: 0.241441 },
+                { minute: 20, price: 0.242000 },
+                { minute: 43, price: 0.242606 },
+                { minute: 47, price: 0.241832 },
+                { minute: 49, price: 0.241990 },
+                { minute: 60, price: 0.241489 }
+            ];
+            
+            for (let i = 0; i <= 60; i++) {
+                const time = new Date(startTime.getTime() + i * 60000);
+                let price = interpolatePrice(i, knownPoints);
+                price += (Math.random() - 0.5) * 0.0002;
+                price = Math.max(price, targetPrice + 0.00005);
+                
+                data.push({
+                    x: time,
+                    y: parseFloat(price.toFixed(6))
+                });
+            }
+            
+            return data;
+        }
+
+        function interpolatePrice(minute, knownPoints) {
+            let before = knownPoints[0];
+            let after = knownPoints[knownPoints.length - 1];
+            
+            for (let i = 0; i < knownPoints.length - 1; i++) {
+                if (minute >= knownPoints[i].minute && minute <= knownPoints[i + 1].minute) {
+                    before = knownPoints[i];
+                    after = knownPoints[i + 1];
+                    break;
+                }
+            }
+            
+            const ratio = (minute - before.minute) / (after.minute - before.minute);
+            return before.price + ratio * (after.price - before.price);
+        }
+
+        // Function to find price at specific time
+        function getPriceAtTime(timeStr, priceData) {
+            const tradeTime = new Date(`2025-08-13T${timeStr}Z`);
+            
+            // Find closest price point
+            let closestPoint = priceData[0];
+            let minDiff = Math.abs(closestPoint.x.getTime() - tradeTime.getTime());
+            
+            for (let point of priceData) {
+                const diff = Math.abs(point.x.getTime() - tradeTime.getTime());
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestPoint = point;
+                }
+            }
+            
+            return closestPoint.y;
+        }
+
+        // Create trade points positioned on price line
+        function createTradePoints(priceData) {
+            const buyYes = [];
+            const sellYes = [];
+            const buyNo = [];
+            const sellNo = [];
+
+            allTrades.forEach(trade => {
+                const tradeTime = new Date(`2025-08-13T${trade.time}Z`);
+                const priceAtTime = getPriceAtTime(trade.time, priceData);
+                
+                // Add small offset to prevent overlapping (above/below the line)
+                const yOffset = (Math.random() - 0.5) * 0.0001;
+                
+                const point = {
+                    x: tradeTime,
+                    y: priceAtTime + yOffset,
+                    trade: trade
+                };
+
+                // Categorize trades
+                if (trade.direction === 'YES' && trade.strategy === 'BUY') {
+                    buyYes.push(point);
+                } else if (trade.direction === 'YES' && trade.strategy === 'SELL') {
+                    sellYes.push(point);
+                } else if (trade.direction === 'NO' && trade.strategy === 'BUY') {
+                    buyNo.push(point);
+                } else {
+                    sellNo.push(point);
+                }
+            });
+
+            // Update stats
+            document.getElementById('buyYesCount').textContent = buyYes.length;
+            document.getElementById('sellYesCount').textContent = sellYes.length;
+            document.getElementById('buyNoCount').textContent = buyNo.length;
+            document.getElementById('sellNoCount').textContent = sellNo.length;
+
+            return { buyYes, sellYes, buyNo, sellNo };
+        }
+
+        function getPointRadius(trade) {
+            switch(trade.size) {
+                case 'legendary': return 16;
+                case 'huge': return 12;
+                case 'large': return 10;
+                case 'medium': return 8;
+                default: return 6;
+            }
+        }
+
+        // Generate data
+        const priceData = generatePriceData();
+        const targetPrice = 0.24072;
+        const resolutionPrice = 0.241238;
+        const tradePoints = createTradePoints(priceData);
+
+        // Create reference lines
+        const startTime = priceData[0].x;
+        const endTime = priceData[priceData.length - 1].x;
+        const targetLine = [
+            { x: startTime, y: targetPrice },
+            { x: endTime, y: targetPrice }
+        ];
+        const resolutionLine = [
+            { x: startTime, y: resolutionPrice },
+            { x: endTime, y: resolutionPrice }
+        ];
+
+        // Custom plugin to draw arrows in circles
+        const arrowPlugin = {
+            id: 'arrowPlugin',
+            afterDatasetsDraw: (chart, args, options) => {
+                const { ctx } = chart;
+                
+                // Function to draw arrow in circle
+                function drawArrowCircle(x, y, radius, backgroundColor, arrow) {
+                    ctx.save();
+                    
+                    // Draw circle
+                    ctx.fillStyle = backgroundColor;
+                    ctx.strokeStyle = 'white';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    // Draw arrow
+                    ctx.fillStyle = 'white';
+                    ctx.font = `bold ${radius * 1.2}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(arrow, x, y);
+                    
+                    ctx.restore();
+                }
+                
+                // Draw arrows for each dataset
+                chart.data.datasets.forEach((dataset, datasetIndex) => {
+                    if (datasetIndex < 3) return; // Skip price line and reference lines
+                    
+                    const meta = chart.getDatasetMeta(datasetIndex);
+                    if (!meta.data) return;
+                    
+                    meta.data.forEach((point, index) => {
+                        const trade = dataset.data[index].trade;
+                        if (!trade) return;
+                        
+                        const radius = getPointRadius(trade);
+                        let backgroundColor, arrow;
+                        
+                        if (trade.direction === 'YES' && trade.strategy === 'BUY') {
+                            backgroundColor = '#28a745';
+                            arrow = '↑';
+                        } else if (trade.direction === 'YES' && trade.strategy === 'SELL') {
+                            backgroundColor = '#dc3545';
+                            arrow = '↑';
+                        } else if (trade.direction === 'NO' && trade.strategy === 'BUY') {
+                            backgroundColor = '#28a745';
+                            arrow = '↓';
+                        } else {
+                            backgroundColor = '#dc3545';
+                            arrow = '↓';
+                        }
+                        
+                        drawArrowCircle(point.x, point.y, radius, backgroundColor, arrow);
+                    });
+                });
+            }
+        };
+
+        // Register the plugin
+        Chart.register(arrowPlugin);
+
+        const ctx = document.getElementById('fixedArrowChart').getContext('2d');
+        
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: 'DOGE Price',
+                        data: priceData,
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        pointHoverRadius: 0,
+                        tension: 0.3,
+                        fill: true,
+                        order: 1
+                    },
+                    {
+                        label: 'Target Price',
+                        data: targetLine,
+                        borderColor: '#dc3545',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [8, 4],
+                        pointRadius: 0,
+                        tension: 0,
+                        order: 2
+                    },
+                    {
+                        label: 'Resolution',
+                        data: resolutionLine,
+                        borderColor: '#fd7e14',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [4, 2],
+                        pointRadius: 0,
+                        tension: 0,
+                        order: 3
+                    },
+                    {
+                        label: 'BUY YES',
+                        data: tradePoints.buyYes,
+                        type: 'scatter',
+                        backgroundColor: 'transparent', // We'll draw custom arrows
+                        borderColor: 'transparent',
+                        pointRadius: 0, // Hide default points
+                        showLine: false,
+                        order: 4
+                    },
+                    {
+                        label: 'SELL YES',
+                        data: tradePoints.sellYes,
+                        type: 'scatter',
+                        backgroundColor: 'transparent',
+                        borderColor: 'transparent',
+                        pointRadius: 0,
+                        showLine: false,
+                        order: 5
+                    },
+                    {
+                        label: 'BUY NO',
+                        data: tradePoints.buyNo,
+                        type: 'scatter',
+                        backgroundColor: 'transparent',
+                        borderColor: 'transparent',
+                        pointRadius: 0,
+                        showLine: false,
+                        order: 6
+                    },
+                    {
+                        label: 'SELL NO',
+                        data: tradePoints.sellNo,
+                        type: 'scatter',
+                        backgroundColor: 'transparent',
+                        borderColor: 'transparent',
+                        pointRadius: 0,
+                        showLine: false,
+                        order: 7
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'DOGE Trading - Fixed Arrow Visualization on Price Line',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        padding: 20
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        filter: function(tooltipItem) {
+                            return tooltipItem.datasetIndex > 2;
+                        },
+                        callbacks: {
+                            title: function(context) {
+                                return `Time: ${context[0].parsed.x.toISOString().substr(11, 8)}`;
+                            },
+                            label: function(context) {
+                                const trade = context.raw.trade;
+                                if (trade) {
+                                    const arrow = trade.direction === 'YES' ? '↑' : '↓';
+                                    const color = trade.strategy === 'BUY' ? 'Green' : 'Red';
+                                    return [
+                                        `${color} ${arrow} ${trade.direction} ${trade.strategy}`,
+                                        `${trade.contracts} contracts`,
+                                        `Trader: ${trade.trader}`,
+                                        `Price at time: $${context.parsed.y.toFixed(6)}`
+                                    ];
+                                }
+                                return '';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'minute',
+                            displayFormats: {
+                                minute: 'HH:mm'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Time (UTC)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'DOGE Price (USD)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toFixed(6);
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    intersect: false
+                }
+            }
+        });
+    </script>
+</body>
+</html>

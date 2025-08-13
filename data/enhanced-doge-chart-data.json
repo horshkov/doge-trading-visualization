@@ -1,0 +1,995 @@
+{
+  "priceData": [
+    {
+      "time": "16:00:00",
+      "price": 0.241377,
+      "aboveTarget": true,
+      "timestamp": 1755100800000
+    },
+    {
+      "time": "16:01:00",
+      "price": 0.241413,
+      "aboveTarget": true,
+      "timestamp": 1755100860000
+    },
+    {
+      "time": "16:02:00",
+      "price": 0.241363,
+      "aboveTarget": true,
+      "timestamp": 1755100920000
+    },
+    {
+      "time": "16:03:00",
+      "price": 0.241514,
+      "aboveTarget": true,
+      "timestamp": 1755100980000
+    },
+    {
+      "time": "16:04:00",
+      "price": 0.24157,
+      "aboveTarget": true,
+      "timestamp": 1755101040000
+    },
+    {
+      "time": "16:05:00",
+      "price": 0.241586,
+      "aboveTarget": true,
+      "timestamp": 1755101100000
+    },
+    {
+      "time": "16:06:00",
+      "price": 0.241649,
+      "aboveTarget": true,
+      "timestamp": 1755101160000
+    },
+    {
+      "time": "16:07:00",
+      "price": 0.24172,
+      "aboveTarget": true,
+      "timestamp": 1755101220000
+    },
+    {
+      "time": "16:08:00",
+      "price": 0.241807,
+      "aboveTarget": true,
+      "timestamp": 1755101280000
+    },
+    {
+      "time": "16:09:00",
+      "price": 0.241858,
+      "aboveTarget": true,
+      "timestamp": 1755101340000
+    },
+    {
+      "time": "16:10:00",
+      "price": 0.24161,
+      "aboveTarget": true,
+      "timestamp": 1755101400000
+    },
+    {
+      "time": "16:11:00",
+      "price": 0.241765,
+      "aboveTarget": true,
+      "timestamp": 1755101460000
+    },
+    {
+      "time": "16:12:00",
+      "price": 0.241853,
+      "aboveTarget": true,
+      "timestamp": 1755101520000
+    },
+    {
+      "time": "16:13:00",
+      "price": 0.241924,
+      "aboveTarget": true,
+      "timestamp": 1755101580000
+    },
+    {
+      "time": "16:14:00",
+      "price": 0.241862,
+      "aboveTarget": true,
+      "timestamp": 1755101640000
+    },
+    {
+      "time": "16:15:00",
+      "price": 0.242086,
+      "aboveTarget": true,
+      "timestamp": 1755101700000
+    },
+    {
+      "time": "16:16:00",
+      "price": 0.242114,
+      "aboveTarget": true,
+      "timestamp": 1755101760000
+    },
+    {
+      "time": "16:17:00",
+      "price": 0.242094,
+      "aboveTarget": true,
+      "timestamp": 1755101820000
+    },
+    {
+      "time": "16:18:00",
+      "price": 0.242206,
+      "aboveTarget": true,
+      "timestamp": 1755101880000
+    },
+    {
+      "time": "16:19:00",
+      "price": 0.242018,
+      "aboveTarget": true,
+      "timestamp": 1755101940000
+    },
+    {
+      "time": "16:20:00",
+      "price": 0.242157,
+      "aboveTarget": true,
+      "timestamp": 1755102000000
+    },
+    {
+      "time": "16:21:00",
+      "price": 0.242521,
+      "aboveTarget": true,
+      "timestamp": 1755102060000
+    },
+    {
+      "time": "16:22:00",
+      "price": 0.242371,
+      "aboveTarget": true,
+      "timestamp": 1755102120000
+    },
+    {
+      "time": "16:23:00",
+      "price": 0.242215,
+      "aboveTarget": true,
+      "timestamp": 1755102180000
+    },
+    {
+      "time": "16:24:00",
+      "price": 0.242433,
+      "aboveTarget": true,
+      "timestamp": 1755102240000
+    },
+    {
+      "time": "16:25:00",
+      "price": 0.242334,
+      "aboveTarget": true,
+      "timestamp": 1755102300000
+    },
+    {
+      "time": "16:26:00",
+      "price": 0.242228,
+      "aboveTarget": true,
+      "timestamp": 1755102360000
+    },
+    {
+      "time": "16:27:00",
+      "price": 0.24241,
+      "aboveTarget": true,
+      "timestamp": 1755102420000
+    },
+    {
+      "time": "16:28:00",
+      "price": 0.242496,
+      "aboveTarget": true,
+      "timestamp": 1755102480000
+    },
+    {
+      "time": "16:29:00",
+      "price": 0.242202,
+      "aboveTarget": true,
+      "timestamp": 1755102540000
+    },
+    {
+      "time": "16:30:00",
+      "price": 0.242348,
+      "aboveTarget": true,
+      "timestamp": 1755102600000
+    },
+    {
+      "time": "16:31:00",
+      "price": 0.242445,
+      "aboveTarget": true,
+      "timestamp": 1755102660000
+    },
+    {
+      "time": "16:32:00",
+      "price": 0.242386,
+      "aboveTarget": true,
+      "timestamp": 1755102720000
+    },
+    {
+      "time": "16:33:00",
+      "price": 0.242376,
+      "aboveTarget": true,
+      "timestamp": 1755102780000
+    },
+    {
+      "time": "16:34:00",
+      "price": 0.242239,
+      "aboveTarget": true,
+      "timestamp": 1755102840000
+    },
+    {
+      "time": "16:35:00",
+      "price": 0.242587,
+      "aboveTarget": true,
+      "timestamp": 1755102900000
+    },
+    {
+      "time": "16:36:00",
+      "price": 0.242385,
+      "aboveTarget": true,
+      "timestamp": 1755102960000
+    },
+    {
+      "time": "16:37:00",
+      "price": 0.242527,
+      "aboveTarget": true,
+      "timestamp": 1755103020000
+    },
+    {
+      "time": "16:38:00",
+      "price": 0.242471,
+      "aboveTarget": true,
+      "timestamp": 1755103080000
+    },
+    {
+      "time": "16:39:00",
+      "price": 0.242441,
+      "aboveTarget": true,
+      "timestamp": 1755103140000
+    },
+    {
+      "time": "16:40:00",
+      "price": 0.242216,
+      "aboveTarget": true,
+      "timestamp": 1755103200000
+    },
+    {
+      "time": "16:41:00",
+      "price": 0.242517,
+      "aboveTarget": true,
+      "timestamp": 1755103260000
+    },
+    {
+      "time": "16:42:00",
+      "price": 0.242262,
+      "aboveTarget": true,
+      "timestamp": 1755103320000
+    },
+    {
+      "time": "16:43:00",
+      "price": 0.242267,
+      "aboveTarget": true,
+      "timestamp": 1755103380000
+    },
+    {
+      "time": "16:44:00",
+      "price": 0.242195,
+      "aboveTarget": true,
+      "timestamp": 1755103440000
+    },
+    {
+      "time": "16:45:00",
+      "price": 0.242095,
+      "aboveTarget": true,
+      "timestamp": 1755103500000
+    },
+    {
+      "time": "16:46:00",
+      "price": 0.241963,
+      "aboveTarget": true,
+      "timestamp": 1755103560000
+    },
+    {
+      "time": "16:47:00",
+      "price": 0.241923,
+      "aboveTarget": true,
+      "timestamp": 1755103620000
+    },
+    {
+      "time": "16:48:00",
+      "price": 0.242129,
+      "aboveTarget": true,
+      "timestamp": 1755103680000
+    },
+    {
+      "time": "16:49:00",
+      "price": 0.242123,
+      "aboveTarget": true,
+      "timestamp": 1755103740000
+    },
+    {
+      "time": "16:50:00",
+      "price": 0.241891,
+      "aboveTarget": true,
+      "timestamp": 1755103800000
+    },
+    {
+      "time": "16:51:00",
+      "price": 0.241843,
+      "aboveTarget": true,
+      "timestamp": 1755103860000
+    },
+    {
+      "time": "16:52:00",
+      "price": 0.241894,
+      "aboveTarget": true,
+      "timestamp": 1755103920000
+    },
+    {
+      "time": "16:53:00",
+      "price": 0.241816,
+      "aboveTarget": true,
+      "timestamp": 1755103980000
+    },
+    {
+      "time": "16:54:00",
+      "price": 0.241696,
+      "aboveTarget": true,
+      "timestamp": 1755104040000
+    },
+    {
+      "time": "16:55:00",
+      "price": 0.241619,
+      "aboveTarget": true,
+      "timestamp": 1755104100000
+    },
+    {
+      "time": "16:56:00",
+      "price": 0.241647,
+      "aboveTarget": true,
+      "timestamp": 1755104160000
+    },
+    {
+      "time": "16:57:00",
+      "price": 0.241685,
+      "aboveTarget": true,
+      "timestamp": 1755104220000
+    },
+    {
+      "time": "16:58:00",
+      "price": 0.241563,
+      "aboveTarget": true,
+      "timestamp": 1755104280000
+    },
+    {
+      "time": "16:59:00",
+      "price": 0.241579,
+      "aboveTarget": true,
+      "timestamp": 1755104340000
+    },
+    {
+      "time": "17:00:00",
+      "price": 0.241555,
+      "aboveTarget": true,
+      "timestamp": 1755104400000
+    }
+  ],
+  "tradingEvents": [
+    {
+      "time": "15:03:29",
+      "contracts": 1.975489,
+      "direction": "YES",
+      "trader": "Tlingg",
+      "timestamp": 1755097409000
+    },
+    {
+      "time": "15:04:25",
+      "contracts": 3.989237,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097465000
+    },
+    {
+      "time": "15:04:47",
+      "contracts": 33.725627,
+      "direction": "NO",
+      "trader": "EL CERTIFIED",
+      "timestamp": 1755097487000
+    },
+    {
+      "time": "15:05:19",
+      "contracts": 25.635501,
+      "direction": "YES",
+      "trader": "0x213f5aE429300be3cf1c13e9AC7f6713590eA08E",
+      "timestamp": 1755097519000
+    },
+    {
+      "time": "15:05:27",
+      "contracts": 10.483424,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097527000
+    },
+    {
+      "time": "15:05:41",
+      "contracts": 10.483421,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097541000
+    },
+    {
+      "time": "15:05:43",
+      "contracts": 2.191614,
+      "direction": "YES",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "timestamp": 1755097543000
+    },
+    {
+      "time": "15:05:53",
+      "contracts": 10.259975,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097553000
+    },
+    {
+      "time": "15:06:07",
+      "contracts": 3.989235,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097567000
+    },
+    {
+      "time": "15:08:21",
+      "contracts": 10.259976,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097701000
+    },
+    {
+      "time": "15:09:35",
+      "contracts": 31.794595,
+      "direction": "NO",
+      "trader": "ChaJungKyu",
+      "timestamp": 1755097775000
+    },
+    {
+      "time": "15:09:57",
+      "contracts": 19.490677,
+      "direction": "NO",
+      "trader": "0x034C69359dAa2c1ea728c52fbe448e071ff16B6A",
+      "timestamp": 1755097797000
+    },
+    {
+      "time": "15:10:59",
+      "contracts": 1.90679,
+      "direction": "YES",
+      "trader": "Jiwoin",
+      "timestamp": 1755097859000
+    },
+    {
+      "time": "15:11:13",
+      "contracts": 3.677686,
+      "direction": "YES",
+      "trader": "Tiep05",
+      "timestamp": 1755097873000
+    },
+    {
+      "time": "15:11:39",
+      "contracts": 16.160118,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755097899000
+    },
+    {
+      "time": "15:15:41",
+      "contracts": 27.98145,
+      "direction": "NO",
+      "trader": "0x807472D16F72d22326bE0Af18DB28966B5818a79",
+      "timestamp": 1755098141000
+    },
+    {
+      "time": "15:16:37",
+      "contracts": 18.520887,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755098197000
+    },
+    {
+      "time": "15:17:27",
+      "contracts": 57.623632,
+      "direction": "YES",
+      "trader": "Crypto Tariqul",
+      "timestamp": 1755098247000
+    },
+    {
+      "time": "15:17:57",
+      "contracts": 34.681006,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755098277000
+    },
+    {
+      "time": "15:18:33",
+      "contracts": 11.60125,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755098313000
+    },
+    {
+      "time": "15:19:29",
+      "contracts": 11.601249,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755098369000
+    },
+    {
+      "time": "15:23:41",
+      "contracts": 0.247756,
+      "direction": "YES",
+      "trader": "Coraline",
+      "timestamp": 1755098621000
+    },
+    {
+      "time": "15:23:47",
+      "contracts": 15.816847,
+      "direction": "YES",
+      "trader": "0x6f578eEf503773F3b840801A2Af464703e0BAd64",
+      "timestamp": 1755098627000
+    },
+    {
+      "time": "15:24:37",
+      "contracts": 9.874392,
+      "direction": "YES",
+      "trader": "0x64bAC0FC115Ef0bb3e49EAcafE89a8404Dbb4c8a",
+      "timestamp": 1755098677000
+    },
+    {
+      "time": "15:30:11",
+      "contracts": 10.067848,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099011000
+    },
+    {
+      "time": "15:30:31",
+      "contracts": 10.067849,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099031000
+    },
+    {
+      "time": "15:30:37",
+      "contracts": 9.034725,
+      "direction": "YES",
+      "trader": "0x8a1F050b9D78416206d8c51bcF3c4E92EbFf91c7",
+      "timestamp": 1755099037000
+    },
+    {
+      "time": "15:30:49",
+      "contracts": 11.013451,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099049000
+    },
+    {
+      "time": "15:31:11",
+      "contracts": 2.055628,
+      "direction": "NO",
+      "trader": "Tlingg",
+      "timestamp": 1755099071000
+    },
+    {
+      "time": "15:31:59",
+      "contracts": 3.987186,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099119000
+    },
+    {
+      "time": "15:32:09",
+      "contracts": 9.347298,
+      "direction": "NO",
+      "trader": "bliss",
+      "timestamp": 1755099129000
+    },
+    {
+      "time": "15:33:03",
+      "contracts": 3.660927,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099183000
+    },
+    {
+      "time": "15:34:01",
+      "contracts": 11.339711,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099241000
+    },
+    {
+      "time": "15:37:15",
+      "contracts": 1.908388,
+      "direction": "YES",
+      "trader": "Tlingg",
+      "timestamp": 1755099435000
+    },
+    {
+      "time": "15:37:15",
+      "contracts": 17.492349,
+      "direction": "YES",
+      "trader": "0x4d60cd0F643566c1aa7C1616cFB4464c7aBde830",
+      "timestamp": 1755099435000
+    },
+    {
+      "time": "15:38:01",
+      "contracts": 0.162882,
+      "direction": "YES",
+      "trader": "0xD067...76f8",
+      "timestamp": 1755099481000
+    },
+    {
+      "time": "15:38:29",
+      "contracts": 67.453022,
+      "direction": "YES",
+      "trader": "0x4d60cd0F643566c1aa7C1616cFB4464c7aBde830",
+      "timestamp": 1755099509000
+    },
+    {
+      "time": "15:39:09",
+      "contracts": 0.11934,
+      "direction": "YES",
+      "trader": "SATOSHIANAKONDO",
+      "timestamp": 1755099549000
+    },
+    {
+      "time": "15:39:33",
+      "contracts": 25.733189,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099573000
+    },
+    {
+      "time": "15:40:05",
+      "contracts": 25.733185,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099605000
+    },
+    {
+      "time": "15:40:49",
+      "contracts": 34.566483,
+      "direction": "YES",
+      "trader": "0x59c530055DAAf3Bc8216570897D0957481319ae4",
+      "timestamp": 1755099649000
+    },
+    {
+      "time": "15:41:03",
+      "contracts": 36.648743,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099663000
+    },
+    {
+      "time": "15:42:01",
+      "contracts": 36.648735,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755099721000
+    },
+    {
+      "time": "15:43:11",
+      "contracts": 27.540305,
+      "direction": "YES",
+      "trader": "0x7079694755bB8bFDbCF1a98900FE5e299a126643",
+      "timestamp": 1755099791000
+    },
+    {
+      "time": "15:43:17",
+      "contracts": 1.085609,
+      "direction": "YES",
+      "trader": "0xE6d79731bDBb20C3bA0Ca83aD50B049Bb0db0d0a",
+      "timestamp": 1755099797000
+    },
+    {
+      "time": "15:44:11",
+      "contracts": 1.228148,
+      "direction": "NO",
+      "trader": "0xA2857232F19D16D3675824C884bfe2E71d72d7cE",
+      "timestamp": 1755099851000
+    },
+    {
+      "time": "15:44:47",
+      "contracts": 10.812857,
+      "direction": "YES",
+      "trader": "Rogue",
+      "timestamp": 1755099887000
+    },
+    {
+      "time": "15:45:27",
+      "contracts": 21.371851,
+      "direction": "YES",
+      "trader": "0xF8a41aFc474FD2299e66F4A6cE1019bd2e1866E1",
+      "timestamp": 1755099927000
+    },
+    {
+      "time": "15:46:07",
+      "contracts": 4.240588,
+      "direction": "YES",
+      "trader": "0xFEc4050Eedabc2E5b421744c75748DC97f10Fec0",
+      "timestamp": 1755099967000
+    },
+    {
+      "time": "15:46:09",
+      "contracts": 56.230711,
+      "direction": "YES",
+      "trader": "Crypto Tariqul",
+      "timestamp": 1755099969000
+    },
+    {
+      "time": "15:47:29",
+      "contracts": 220.647774,
+      "direction": "YES",
+      "trader": "Kryptdip",
+      "timestamp": 1755100049000
+    },
+    {
+      "time": "15:48:19",
+      "contracts": 46.323143,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100099000
+    },
+    {
+      "time": "15:48:37",
+      "contracts": 36.19771,
+      "direction": "NO",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "timestamp": 1755100117000
+    },
+    {
+      "time": "15:48:57",
+      "contracts": 105.304536,
+      "direction": "NO",
+      "trader": "0xht9",
+      "timestamp": 1755100137000
+    },
+    {
+      "time": "15:48:59",
+      "contracts": 18.787835,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100139000
+    },
+    {
+      "time": "15:49:15",
+      "contracts": 27.535293,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100155000
+    },
+    {
+      "time": "15:49:47",
+      "contracts": 50.062843,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100187000
+    },
+    {
+      "time": "15:50:15",
+      "contracts": 31.985763,
+      "direction": "YES",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "timestamp": 1755100215000
+    },
+    {
+      "time": "15:50:57",
+      "contracts": 43.770351,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100257000
+    },
+    {
+      "time": "15:51:15",
+      "contracts": 44.040815,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100275000
+    },
+    {
+      "time": "15:52:27",
+      "contracts": 49.792398,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100347000
+    },
+    {
+      "time": "15:53:31",
+      "contracts": 24.346565,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100411000
+    },
+    {
+      "time": "15:53:43",
+      "contracts": 77.601703,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100423000
+    },
+    {
+      "time": "15:53:59",
+      "contracts": 42.812317,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100439000
+    },
+    {
+      "time": "15:54:13",
+      "contracts": 28.192627,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100453000
+    },
+    {
+      "time": "15:54:39",
+      "contracts": 20.676192,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100479000
+    },
+    {
+      "time": "15:54:57",
+      "contracts": 25.720525,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100497000
+    },
+    {
+      "time": "15:55:33",
+      "contracts": 6.154845,
+      "direction": "YES",
+      "trader": "0xDd36D05641554cbA011c9D603652691211B0624f",
+      "timestamp": 1755100533000
+    },
+    {
+      "time": "15:55:49",
+      "contracts": 33.544013,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100549000
+    },
+    {
+      "time": "15:56:35",
+      "contracts": 2.26705,
+      "direction": "YES",
+      "trader": "0x2b2cA9d399919505D05107579D7984Cf613575d3",
+      "timestamp": 1755100595000
+    },
+    {
+      "time": "15:56:37",
+      "contracts": 22.288659,
+      "direction": "YES",
+      "trader": "0xA91fA67bDE2b2fF31e91Ee6B7a60961488aBA2Cb",
+      "timestamp": 1755100597000
+    },
+    {
+      "time": "15:57:19",
+      "contracts": 134.364858,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100639000
+    },
+    {
+      "time": "15:57:35",
+      "contracts": 107.430035,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100655000
+    },
+    {
+      "time": "15:57:49",
+      "contracts": 26.39705,
+      "direction": "YES",
+      "trader": "0xB650e795fbBbe90E7fC5aefBFfC518F1B973445f",
+      "timestamp": 1755100669000
+    },
+    {
+      "time": "15:58:47",
+      "contracts": 107.430039,
+      "direction": "NO",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100727000
+    },
+    {
+      "time": "15:59:11",
+      "contracts": 21.358444,
+      "direction": "YES",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "timestamp": 1755100751000
+    },
+    {
+      "time": "15:59:13",
+      "contracts": 22.185971,
+      "direction": "YES",
+      "trader": "0xA91fA67bDE2b2fF31e91Ee6B7a60961488aBA2Cb",
+      "timestamp": 1755100753000
+    },
+    {
+      "time": "15:59:13",
+      "contracts": 35.603219,
+      "direction": "NO",
+      "trader": "0xddCa6886b00120A066156DC9093544Ba09a05E34",
+      "timestamp": 1755100753000
+    },
+    {
+      "time": "15:59:19",
+      "contracts": 11.503406,
+      "direction": "YES",
+      "trader": "Tlingg",
+      "timestamp": 1755100759000
+    },
+    {
+      "time": "15:59:29",
+      "contracts": 199.827632,
+      "direction": "YES",
+      "trader": "PHILARMONIA",
+      "timestamp": 1755100769000
+    },
+    {
+      "time": "15:59:37",
+      "contracts": 281.723744,
+      "direction": "YES",
+      "trader": "0x8e8AdEB64BCd257Fdd83645296045094d0CC1845",
+      "timestamp": 1755100777000
+    },
+    {
+      "time": "15:59:43",
+      "contracts": 36.43466,
+      "direction": "YES",
+      "trader": "0x6e8226c519317714E0246cD5d2D69AD2cbCde82F",
+      "timestamp": 1755100783000
+    },
+    {
+      "time": "15:59:47",
+      "contracts": 29.172634,
+      "direction": "NO",
+      "trader": "Tlingg",
+      "timestamp": 1755100787000
+    },
+    {
+      "time": "15:59:53",
+      "contracts": 188.266255,
+      "direction": "YES",
+      "trader": "0xDc0e774e2aeBbabBeEc949aE2eC03A5ed3d98530",
+      "timestamp": 1755100793000
+    },
+    {
+      "time": "15:59:53",
+      "contracts": 108.068921,
+      "direction": "YES",
+      "trader": "siqhenz",
+      "timestamp": 1755100793000
+    },
+    {
+      "time": "15:59:55",
+      "contracts": 571.20729,
+      "direction": "YES",
+      "trader": "Rogue",
+      "timestamp": 1755100795000
+    },
+    {
+      "time": "16:00:01",
+      "contracts": 9.843757,
+      "direction": "YES",
+      "trader": "JAHAN ALVEE",
+      "timestamp": 1755100801000
+    },
+    {
+      "time": "16:00:07",
+      "contracts": 132.472692,
+      "direction": "YES",
+      "trader": "0x3f45C62a8e151B42dd69E15B0EB976F5dC8aC6EC",
+      "timestamp": 1755100807000
+    }
+  ],
+  "marketInfo": {
+    "targetPrice": 0.24072,
+    "resolutionPrice": 0.24123809000000002,
+    "totalVolume": 2386.03132,
+    "totalTrades": 88,
+    "result": "YES"
+  }
+}
