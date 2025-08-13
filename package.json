@@ -1,16 +1,41 @@
 {
-  "name": "limitless-trading-project",
+  "name": "doge-trading-visualization",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "🐕 Advanced DOGE trading visualization with Apple-style UI - High-frequency analysis of prediction market data",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build step required for static assets'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "doge",
+    "trading",
+    "visualization",
+    "chart",
+    "apple-ui",
+    "prediction-markets",
+    "limitless-exchange",
+    "high-frequency"
+  ],
+  "author": "DOGE Trading Visualization Project",
+  "license": "MIT",
   "type": "commonjs",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
   "dependencies": {
-    "axios": "^1.11.0"
+    "axios": "^1.11.0",
+    "express": "^4.21.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/horshkov/doge-trading-visualization.git"
+  },
+  "homepage": "https://github.com/horshkov/doge-trading-visualization#readme",
+  "bugs": {
+    "url": "https://github.com/horshkov/doge-trading-visualization/issues"
   }
 }
