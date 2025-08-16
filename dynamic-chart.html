@@ -601,6 +601,7 @@
                         time: new Date(event.createdAt),
                         timeString: new Date(event.createdAt).toISOString().substr(11, 8),
                         contracts: parseFloat(event.takerAmount || event.contracts || 0),
+                        usdAmount: parseFloat(event.price || 0) * parseFloat(event.takerAmount || event.contracts || 0),
                         direction: event.outcome || 'YES',
                         strategy: (event.strategy || 'BUY').toUpperCase(),
                         trader: event.profile?.displayName || 
@@ -876,8 +877,10 @@
                                 label: 'BUY YES',
                                 data: tradePoints.buyYes,
                                 type: 'scatter',
-                                backgroundColor: 'transparent',
-                                pointRadius: 0,
+                                backgroundColor: 'rgba(48, 209, 88, 0.1)',
+                                borderColor: 'transparent',
+                                pointRadius: 8,
+                                pointHoverRadius: 12,
                                 showLine: false,
                                 order: 3
                             },
@@ -885,8 +888,10 @@
                                 label: 'SELL YES',
                                 data: tradePoints.sellYes,
                                 type: 'scatter',
-                                backgroundColor: 'transparent',
-                                pointRadius: 0,
+                                backgroundColor: 'rgba(255, 59, 48, 0.1)',
+                                borderColor: 'transparent',
+                                pointRadius: 8,
+                                pointHoverRadius: 12,
                                 showLine: false,
                                 order: 4
                             },
@@ -894,8 +899,10 @@
                                 label: 'BUY NO',
                                 data: tradePoints.buyNo,
                                 type: 'scatter',
-                                backgroundColor: 'transparent',
-                                pointRadius: 0,
+                                backgroundColor: 'rgba(48, 209, 88, 0.1)',
+                                borderColor: 'transparent',
+                                pointRadius: 8,
+                                pointHoverRadius: 12,
                                 showLine: false,
                                 order: 5
                             },
@@ -903,8 +910,10 @@
                                 label: 'SELL NO',
                                 data: tradePoints.sellNo,
                                 type: 'scatter',
-                                backgroundColor: 'transparent',
-                                pointRadius: 0,
+                                backgroundColor: 'rgba(255, 59, 48, 0.1)',
+                                borderColor: 'transparent',
+                                pointRadius: 8,
+                                pointHoverRadius: 12,
                                 showLine: false,
                                 order: 6
                             }
@@ -924,22 +933,40 @@
                                 filter: (tooltipItem) => tooltipItem.datasetIndex > 1,
                                 callbacks: {
                                     title: (context) => {
-                                        const time = new Date(context[0].parsed.x);
-                                        return time.toISOString().substr(11, 8) + ' UTC';
+                                        const trade = context[0].raw.trade;
+                                        if (trade) {
+                                            const arrow = trade.direction === 'YES' ? '↑' : '↓';
+                                            const strategyColor = trade.strategy === 'BUY' ? '🟢' : '🔴';
+                                            return `${strategyColor} ${arrow} ${trade.strategy} ${trade.direction}`;
+                                        }
+                                        return 'Trade Details';
                                     },
                                     label: (context) => {
                                         const trade = context.raw.trade;
                                         if (trade) {
-                                            const arrow = trade.direction === 'YES' ? '↑' : '↓';
-                                            const color = trade.strategy === 'BUY' ? 'Green' : 'Red';
+                                            const timeStr = trade.time.toISOString().substr(11, 8) + ' UTC';
+                                            const contractsStr = trade.contracts.toFixed(6);
+                                            const usdStr = trade.usdAmount.toFixed(2);
+                                            
                                             return [
-                                                `${color} ${arrow} ${trade.direction} ${trade.strategy}`,
-                                                `${trade.contracts} contracts`,
-                                                `${trade.trader}`,
-                                                `$${context.parsed.y.toFixed(6)}`
+                                                `👤 ${trade.trader}`,
+                                                `⏰ ${timeStr}`,
+                                                `📊 ${contractsStr} contracts`,
+                                                `💰 $${usdStr}`,
+                                                `📈 Price: $${context.parsed.y.toFixed(6)}`
                                             ];
                                         }
                                         return '';
+                                    },
+                                    labelColor: (context) => {
+                                        const trade = context.raw.trade;
+                                        if (trade) {
+                                            return {
+                                                borderColor: trade.strategy === 'BUY' ? '#30d158' : '#ff3b30',
+                                                backgroundColor: trade.strategy === 'BUY' ? '#30d158' : '#ff3b30'
+                                            };
+                                        }
+                                        return { borderColor: '#666', backgroundColor: '#666' };
                                     }
                                 }
                             }
