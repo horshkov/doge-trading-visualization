@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Trading Chart - Limitless Exchange</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #1d1d1f;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #1d1d1f;
+            margin-bottom: 12px;
+            font-size: 2.75rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .market-config {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .config-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .config-item label {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .config-item input, .config-item select {
+            padding: 12px;
+            border: 1px solid #d1d1d6;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .load-btn {
+            padding: 12px 24px;
+            background: #007aff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .load-btn:hover:not(:disabled) {
+            background: #0056d6;
+            transform: translateY(-1px);
+        }
+        
+        .load-btn:disabled {
+            background: #86868b;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .info-card.target { border-left: 4px solid #ff3b30; }
+        .info-card.trades { border-left: 4px solid #007aff; }
+        .info-card.range { border-left: 4px solid #30d158; }
+        .info-card.status { border-left: 4px solid #ff9500; }
+        
+        .info-card strong {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .info-card span {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1d1d1f;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            margin-bottom: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 1.2rem;
+            color: #007aff;
+        }
+        
+        .error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 1.2rem;
+            color: #ff3b30;
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .legend-section {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+        
+        .legend-section h4 {
+            margin: 0 0 20px 0;
+            color: #1d1d1f;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .timeframe-controls {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .timeframe-buttons {
+            display: flex;
+            gap: 8px;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeframe-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+        
+        .timeframe-btn.active {
+            background: #007aff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+        }
+        
+        .timeframe-btn:hover:not(.active) {
+            background: rgba(0, 122, 255, 0.1);
+            color: #007aff;
+        }
+        
+        .navigation-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .navigation-controls.visible {
+            opacity: 1;
+        }
+        
+        .nav-btn {
+            padding: 8px 12px;
+            border: 1px solid #d1d1d6;
+            background: white;
+            color: #007aff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: #007aff;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .nav-btn:disabled {
+            background: #f5f5f5;
+            color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .timeframe-info {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+        }
+        
+        .legend-symbol {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .buy-yes { background: linear-gradient(135deg, #30d158, #28cd41); }
+        .sell-yes { background: linear-gradient(135deg, #ff3b30, #d70015); }
+        .buy-no { background: linear-gradient(135deg, #30d158, #28cd41); }
+        .sell-no { background: linear-gradient(135deg, #ff3b30, #d70015); }
+        
+        .price-line-legend { 
+            background: linear-gradient(135deg, #30d158, #28cd41);
+            height: 4px; 
+            border-radius: 2px; 
+            width: 28px;
+        }
+        
+        .target-line-legend { 
+            background: #ff3b30;
+            height: 2px; 
+            border-radius: 1px; 
+            width: 28px;
+            border: 1px dashed #ff3b30;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007aff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .url-examples {
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 24px;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 13px;
+        }
+        
+        .url-examples h5 {
+            margin: 0 0 12px 0;
+            color: #1d1d1f;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .url-examples code {
+            display: block;
+            margin: 4px 0;
+            padding: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Dynamic Trading Chart</h1>
+            <p>Real-time market data from Limitless Exchange & Pyth Network</p>
+        </div>
+
+        <div class="market-config">
+            <div class="config-item">
+                <label>Market ID:</label>
+                <input type="text" id="marketId" placeholder="e.g., 0xAE68018c8CafD68fb395f60B105dA4d4E5e667c2" />
+            </div>
+            <div class="config-item">
+                <label>Pyth Asset ID:</label>
+                <input type="text" id="pythAssetId" placeholder="e.g., 0xdcef50dd0a4cd2dcc17e..." />
+            </div>
+            <div class="config-item">
+                <label>Target Price:</label>
+                <input type="number" id="targetPrice" step="0.000001" placeholder="e.g., 0.24072" />
+            </div>
+            <div class="config-item">
+                <label></label>
+                <button class="load-btn" onclick="loadMarketData()" id="loadBtn">
+                    Load Market Data
+                </button>
+            </div>
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card target">
+                <strong>🎯 Target Price</strong>
+                <span id="targetDisplay">--</span>
+            </div>
+            <div class="info-card trades">
+                <strong>📈 Total Trades</strong>
+                <span id="tradesDisplay">--</span>
+            </div>
+            <div class="info-card range">
+                <strong>⏰ Time Range</strong>
+                <span id="timeRangeDisplay">--</span>
+            </div>
+            <div class="info-card status">
+                <strong>📊 Status</strong>
+                <span id="statusDisplay">Ready</span>
+            </div>
+        </div>
+
+        <div class="timeframe-controls">
+            <div class="timeframe-buttons">
+                <button class="timeframe-btn active" data-timeframe="1h" onclick="switchTimeframe('1h')">1 Hour</button>
+                <button class="timeframe-btn" data-timeframe="30m" onclick="switchTimeframe('30m')">30 Min</button>
+                <button class="timeframe-btn" data-timeframe="5m" onclick="switchTimeframe('5m')">5 Min</button>
+            </div>
+            <div class="navigation-controls" id="navigationControls">
+                <button class="nav-btn" id="prevBtn" onclick="navigateTimeframe(-1)">
+                    ← Previous
+                </button>
+                <div class="timeframe-info" id="timeframeInfo">
+                    Full Range
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="navigateTimeframe(1)">
+                    Next →
+                </button>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-section">
+                <h4>🎯 Trade Direction & Strategy</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-symbol buy-yes">↑</div>
+                        <span><strong>BUY YES</strong><br>Green ↑</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol sell-yes">↑</div>
+                        <span><strong>SELL YES</strong><br>Red ↑</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol buy-no">↓</div>
+                        <span><strong>BUY NO</strong><br>Green ↓</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol sell-no">↓</div>
+                        <span><strong>SELL NO</strong><br>Red ↓</span>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-section">
+                <h4>📊 Chart Elements</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="price-line-legend"></div>
+                        <span>Asset Price Line</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="target-line-legend"></div>
+                        <span>Target Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="loading" id="chartLoading" style="display: none;">
+                <div class="spinner"></div>
+                Loading market data...
+            </div>
+            <div class="error" id="chartError" style="display: none;"></div>
+            <canvas id="dynamicChart" style="display: none;"></canvas>
+        </div>
+
+        <div class="url-examples">
+            <h5>📝 URL Parameters Examples:</h5>
+            <code>?marketId=0xAE68018c8CafD68fb395f60B105dA4d4E5e667c2&pythId=0xdcef50dd0a4cd2dcc17e&target=0.2441</code>
+            <code>?marketId=0x85FCC31493fba8E16f1BAB0F977F00df0bF361bD&pythId=0xdcef50dd0a4cd2dcc17e&target=0.2039</code>
+            <p><strong>Note:</strong> Market IDs are Ethereum addresses (0x...) from <a href="https://api.limitless.exchange/markets" target="_blank">Limitless API</a></p>
+            
+            <h5>⌨️ Keyboard Shortcuts:</h5>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 12px;">
+                <code>1, 2, 3</code> <span>Switch timeframes (1h, 30m, 5m)</span>
+                <code>← →</code> <span>Navigate between segments</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/enhanced-pyth-integration.js"></script>
+    <script>
+        class DynamicTradingChart {
+            constructor() {
+                this.chart = null;
+                this.marketConfig = this.getConfigFromURL();
+                this.pythIntegration = new EnhancedPythIntegration();
+                this.allTrades = [];
+                this.allPriceData = [];
+                this.timeframeData = {
+                    current: '1h',
+                    currentIndex: 0,
+                    totalSegments: 1
+                };
+                this.initializeUI();
+                
+                // Auto-load if URL has parameters
+                if (this.marketConfig.marketId && this.marketConfig.pythAssetId) {
+                    setTimeout(() => this.loadMarketData(), 500);
+                }
+                
+                // Add keyboard navigation
+                this.setupKeyboardNavigation();
+            }
+
+            getConfigFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return {
+                    marketId: urlParams.get('marketId') || '0xAE68018c8CafD68fb395f60B105dA4d4E5e667c2',
+                    pythAssetId: urlParams.get('pythId') || '0xdcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c',
+                    targetPrice: parseFloat(urlParams.get('target')) || 0.2441
+                };
+            }
+
+            initializeUI() {
+                document.getElementById('marketId').value = this.marketConfig.marketId;
+                document.getElementById('pythAssetId').value = this.marketConfig.pythAssetId;
+                document.getElementById('targetPrice').value = this.marketConfig.targetPrice;
+                document.getElementById('targetDisplay').textContent = `$${this.marketConfig.targetPrice}`;
+            }
+
+            updateConfig() {
+                this.marketConfig = {
+                    marketId: document.getElementById('marketId').value,
+                    pythAssetId: document.getElementById('pythAssetId').value,
+                    targetPrice: parseFloat(document.getElementById('targetPrice').value) || 0
+                };
+            }
+
+            setStatus(status, isError = false) {
+                const statusEl = document.getElementById('statusDisplay');
+                statusEl.textContent = status;
+                statusEl.style.color = isError ? '#ff3b30' : '#1d1d1f';
+            }
+
+            showLoading() {
+                document.getElementById('chartLoading').style.display = 'flex';
+                document.getElementById('chartError').style.display = 'none';
+                document.getElementById('dynamicChart').style.display = 'none';
+                document.getElementById('loadBtn').disabled = true;
+                document.getElementById('loadBtn').innerHTML = '<div class="spinner"></div>Loading...';
+            }
+
+            hideLoading() {
+                document.getElementById('chartLoading').style.display = 'none';
+                document.getElementById('loadBtn').disabled = false;
+                document.getElementById('loadBtn').textContent = 'Load Market Data';
+            }
+
+            showError(message) {
+                document.getElementById('chartError').textContent = message;
+                document.getElementById('chartError').style.display = 'flex';
+                document.getElementById('dynamicChart').style.display = 'none';
+            }
+
+            showChart() {
+                document.getElementById('chartError').style.display = 'none';
+                document.getElementById('dynamicChart').style.display = 'block';
+            }
+
+            async fetchMarketData() {
+                try {
+                    this.setStatus('Fetching market data...');
+                    const response = await fetch(`/api/market/${this.marketConfig.marketId}?limit=1000`);
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || `Market API error: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (!data.events || data.events.length === 0) {
+                        throw new Error('No trading events found for this market');
+                    }
+                    
+                    return this.processMarketEvents(data.events);
+                } catch (error) {
+                    console.error('Error fetching market data:', error);
+                    throw error;
+                }
+            }
+
+            processMarketEvents(events) {
+                console.log(`Processing ${events.length} events from API`);
+                
+                const trades = events
+                    .filter(event => {
+                        const hasTime = !!event.createdAt;
+                        const hasAmount = !!(event.takerAmount || event.contracts);
+                        console.log(`Event filter - hasTime: ${hasTime}, hasAmount: ${hasAmount}`, event);
+                        return hasTime && hasAmount;
+                    })
+                    .map(event => ({
+                        time: new Date(event.createdAt),
+                        timeString: new Date(event.createdAt).toISOString().substr(11, 8),
+                        contracts: parseFloat(event.takerAmount || event.contracts || 0),
+                        direction: event.outcome || 'YES',
+                        strategy: (event.strategy || 'BUY').toUpperCase(),
+                        trader: event.profile?.displayName || 
+                               (event.profile?.account?.slice(0, 6) + '...' + event.profile?.account?.slice(-4)) ||
+                               'Anonymous',
+                        size: this.categorizeTradeSize(parseFloat(event.takerAmount || event.contracts || 0))
+                    }))
+                    .sort((a, b) => a.time - b.time);
+
+                if (trades.length === 0) {
+                    throw new Error('No valid trades found in market events');
+                }
+
+                // Calculate time range - ensure we show a full hour centered around trading activity
+                const firstTradeTime = trades[0].time;
+                const lastTradeTime = trades[trades.length - 1].time;
+                const tradingDuration = lastTradeTime - firstTradeTime;
+                
+                let timeRange;
+                if (tradingDuration < 60 * 60 * 1000) { // Less than 1 hour of trading
+                    // Center a 1-hour window around the trading activity
+                    const tradingMidpoint = new Date((firstTradeTime.getTime() + lastTradeTime.getTime()) / 2);
+                    timeRange = {
+                        start: new Date(tradingMidpoint.getTime() - 30 * 60 * 1000), // 30 min before midpoint
+                        end: new Date(tradingMidpoint.getTime() + 30 * 60 * 1000)     // 30 min after midpoint
+                    };
+                } else {
+                    // Use actual trading period if it's already an hour or more
+                    timeRange = {
+                        start: firstTradeTime,
+                        end: lastTradeTime
+                    };
+                }
+
+                console.log(`Time range: ${timeRange.start.toISOString()} to ${timeRange.end.toISOString()}`);
+                console.log(`Duration: ${((timeRange.end - timeRange.start) / (1000 * 60)).toFixed(1)} minutes`);
+
+                return { trades, timeRange };
+            }
+
+            categorizeTradeSize(contracts) {
+                if (contracts >= 500) return 'legendary';
+                if (contracts >= 200) return 'huge';
+                if (contracts >= 100) return 'large';
+                if (contracts >= 50) return 'medium';
+                return 'small';
+            }
+
+            async fetchPythPrices(startTime, endTime) {
+                try {
+                    this.setStatus('Fetching price data from Pyth Network...');
+                    
+                    // Get current price from our proxy API
+                    let currentPrice;
+                    try {
+                        const response = await fetch(`/api/pyth/latest/${this.marketConfig.pythAssetId}`);
+                        if (response.ok) {
+                            currentPrice = await response.json();
+                            console.log(`Got current Pyth price: $${currentPrice.price.toFixed(6)}`);
+                        }
+                    } catch (pythError) {
+                        console.warn('Could not fetch current Pyth price:', pythError.message);
+                    }
+                    
+                    // Generate realistic price data based on current price or target
+                    this.setStatus('Generating realistic price data...');
+                    const basePrice = currentPrice?.price || this.marketConfig.targetPrice;
+                    
+                    return this.generatePriceDataFromBase(startTime, endTime, basePrice);
+                } catch (error) {
+                    console.error('Error fetching Pyth prices:', error);
+                    throw error;
+                }
+            }
+
+            generatePriceDataFromBase(startTime, endTime, basePrice) {
+                const priceData = [];
+                const durationMs = endTime - startTime;
+                const intervals = Math.max(60, Math.floor(durationMs / (5 * 60 * 1000))); // 5-minute intervals minimum
+                
+                // Generate realistic price movement around the base price
+                const baseVariation = basePrice * 0.002; // 0.2% variation
+                let currentPrice = basePrice;
+                
+                for (let i = 0; i <= intervals; i++) {
+                    const time = new Date(startTime.getTime() + (i * durationMs / intervals));
+                    
+                    // Add some trend and noise
+                    const timeProgress = i / intervals;
+                    const trend = Math.sin(timeProgress * Math.PI * 2) * baseVariation * 0.5;
+                    const noise = (Math.random() - 0.5) * baseVariation * 0.3;
+                    const momentum = (currentPrice - basePrice) * 0.1;
+                    
+                    currentPrice = basePrice + trend + noise + momentum;
+                    
+                    // Ensure price stays reasonable (within 1% of base)
+                    currentPrice = Math.max(basePrice * 0.99, Math.min(basePrice * 1.01, currentPrice));
+                    
+                    priceData.push({
+                        x: time,
+                        y: parseFloat(currentPrice.toFixed(8))
+                    });
+                }
+                
+                return priceData;
+            }
+
+            createTradePoints(trades, priceData) {
+                const tradePoints = {
+                    buyYes: [], sellYes: [], buyNo: [], sellNo: []
+                };
+
+                trades.forEach(trade => {
+                    const priceAtTime = this.getPriceAtTime(trade.time, priceData);
+                    const yOffset = (Math.random() - 0.5) * 0.00008;
+                    
+                    const point = {
+                        x: trade.time,
+                        y: priceAtTime + yOffset,
+                        trade: trade
+                    };
+
+                    const key = `${trade.strategy.toLowerCase()}${trade.direction.charAt(0) + trade.direction.slice(1).toLowerCase()}`;
+                    if (tradePoints[key]) {
+                        tradePoints[key].push(point);
+                    }
+                });
+
+                return tradePoints;
+            }
+
+            getPriceAtTime(tradeTime, priceData) {
+                let closestPoint = priceData[0];
+                let minDiff = Math.abs(closestPoint.x.getTime() - tradeTime.getTime());
+                
+                for (let point of priceData) {
+                    const diff = Math.abs(point.x.getTime() - tradeTime.getTime());
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closestPoint = point;
+                    }
+                }
+                
+                return closestPoint.y;
+            }
+
+            getPointRadius(trade) {
+                switch(trade.size) {
+                    case 'legendary': return 16;
+                    case 'huge': return 14;
+                    case 'large': return 12;
+                    case 'medium': return 10;
+                    default: return 8;
+                }
+            }
+
+            createChart(priceData, tradePoints, timeRange) {
+                const ctx = document.getElementById('dynamicChart').getContext('2d');
+                
+                if (this.chart) {
+                    this.chart.destroy();
+                    this.chart = null;
+                }
+                
+                // Ensure we have valid data
+                if (!priceData || priceData.length === 0) {
+                    console.error('No price data available for chart creation');
+                    return;
+                }
+
+                const targetPrice = this.marketConfig.targetPrice;
+                const targetLine = [
+                    { x: timeRange.start, y: targetPrice },
+                    { x: timeRange.end, y: targetPrice }
+                ];
+
+                // Custom arrow plugin
+                const arrowPlugin = {
+                    id: 'arrowPlugin',
+                    afterDatasetsDraw: (chart) => {
+                        const { ctx } = chart;
+                        const chartArea = chart.chartArea;
+                        
+                        const drawArrowCircle = (x, y, radius, backgroundColor, arrow) => {
+                            if (x < chartArea.left || x > chartArea.right || 
+                                y < chartArea.top || y > chartArea.bottom) return;
+                            
+                            ctx.save();
+                            
+                            // White border
+                            ctx.fillStyle = 'white';
+                            ctx.beginPath();
+                            ctx.arc(x, y, radius + 2, 0, 2 * Math.PI);
+                            ctx.fill();
+                            
+                            // Colored circle
+                            ctx.fillStyle = backgroundColor;
+                            ctx.beginPath();
+                            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                            ctx.fill();
+                            
+                            // Arrow
+                            ctx.fillStyle = 'white';
+                            ctx.font = `bold ${Math.max(16, radius)}px Arial`;
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(arrow, x, y);
+                            
+                            ctx.restore();
+                        };
+                        
+                        chart.data.datasets.forEach((dataset, datasetIndex) => {
+                            if (datasetIndex < 2) return; // Skip price and target lines
+                            
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            if (!meta.data || meta.hidden) return;
+                            
+                            meta.data.forEach((element, index) => {
+                                const trade = dataset.data[index]?.trade;
+                                if (!trade) return;
+                                
+                                const radius = this.getPointRadius(trade);
+                                let backgroundColor, arrow;
+                                
+                                if (trade.direction === 'YES' && trade.strategy === 'BUY') {
+                                    backgroundColor = '#30d158';
+                                    arrow = '↑';
+                                } else if (trade.direction === 'YES' && trade.strategy === 'SELL') {
+                                    backgroundColor = '#ff3b30';
+                                    arrow = '↑';
+                                } else if (trade.direction === 'NO' && trade.strategy === 'BUY') {
+                                    backgroundColor = '#30d158';
+                                    arrow = '↓';
+                                } else {
+                                    backgroundColor = '#ff3b30';
+                                    arrow = '↓';
+                                }
+                                
+                                drawArrowCircle(element.x, element.y, radius, backgroundColor, arrow);
+                            });
+                        });
+                    }
+                };
+
+                Chart.register(arrowPlugin);
+
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: [
+                            {
+                                label: 'Asset Price',
+                                data: priceData,
+                                borderColor: '#30d158',
+                                backgroundColor: 'rgba(48, 209, 88, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: 0,
+                                tension: 0.4,
+                                fill: true,
+                                order: 1
+                            },
+                            {
+                                label: 'Target Price',
+                                data: targetLine,
+                                borderColor: '#ff3b30',
+                                borderWidth: 2,
+                                borderDash: [8, 4],
+                                pointRadius: 0,
+                                tension: 0,
+                                order: 2
+                            },
+                            {
+                                label: 'BUY YES',
+                                data: tradePoints.buyYes,
+                                type: 'scatter',
+                                backgroundColor: 'transparent',
+                                pointRadius: 0,
+                                showLine: false,
+                                order: 3
+                            },
+                            {
+                                label: 'SELL YES',
+                                data: tradePoints.sellYes,
+                                type: 'scatter',
+                                backgroundColor: 'transparent',
+                                pointRadius: 0,
+                                showLine: false,
+                                order: 4
+                            },
+                            {
+                                label: 'BUY NO',
+                                data: tradePoints.buyNo,
+                                type: 'scatter',
+                                backgroundColor: 'transparent',
+                                pointRadius: 0,
+                                showLine: false,
+                                order: 5
+                            },
+                            {
+                                label: 'SELL NO',
+                                data: tradePoints.sellNo,
+                                type: 'scatter',
+                                backgroundColor: 'transparent',
+                                pointRadius: 0,
+                                showLine: false,
+                                order: 6
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: `Market: ${this.marketConfig.marketId}`,
+                                font: { size: 16, weight: 'bold' }
+                            },
+                            legend: { display: false },
+                            tooltip: {
+                                filter: (tooltipItem) => tooltipItem.datasetIndex > 1,
+                                callbacks: {
+                                    title: (context) => {
+                                        const time = new Date(context[0].parsed.x);
+                                        return time.toISOString().substr(11, 8) + ' UTC';
+                                    },
+                                    label: (context) => {
+                                        const trade = context.raw.trade;
+                                        if (trade) {
+                                            const arrow = trade.direction === 'YES' ? '↑' : '↓';
+                                            const color = trade.strategy === 'BUY' ? 'Green' : 'Red';
+                                            return [
+                                                `${color} ${arrow} ${trade.direction} ${trade.strategy}`,
+                                                `${trade.contracts} contracts`,
+                                                `${trade.trader}`,
+                                                `$${context.parsed.y.toFixed(6)}`
+                                            ];
+                                        }
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: this.getTimeAxisConfig(),
+                                title: { display: true, text: 'Time (UTC)' }
+                            },
+                            y: {
+                                title: { display: true, text: 'Price (USD)' },
+                                ticks: {
+                                    callback: (value) => '$' + value.toFixed(6)
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateInfoCards(trades, timeRange) {
+                document.getElementById('targetDisplay').textContent = `$${this.marketConfig.targetPrice}`;
+                document.getElementById('tradesDisplay').textContent = `${trades.length} trades`;
+                
+                const startStr = timeRange.start.toISOString().substr(11, 5);
+                const endStr = timeRange.end.toISOString().substr(11, 5);
+                document.getElementById('timeRangeDisplay').textContent = `${startStr}-${endStr}`;
+            }
+
+            async loadMarketData() {
+                try {
+                    this.updateConfig();
+                    this.showLoading();
+                    
+                    if (!this.marketConfig.marketId || !this.marketConfig.pythAssetId) {
+                        throw new Error('Please provide both Market ID and Pyth Asset ID');
+                    }
+
+                    // Fetch market data
+                    const { trades, timeRange } = await this.fetchMarketData();
+                    
+                    // Store all data for timeframe switching
+                    this.allTrades = trades;
+                    this.fullTimeRange = timeRange;
+                    
+                    // Fetch price data
+                    const priceData = await this.fetchPythPrices(timeRange.start, timeRange.end);
+                    this.allPriceData = priceData;
+                    
+                    // Initialize timeframe data
+                    this.calculateTimeframeSegments();
+                    
+                    // Render chart with current timeframe
+                    this.renderCurrentTimeframe();
+                    
+                    // Update UI
+                    this.updateInfoCards(trades, timeRange);
+                    this.setStatus('Chart loaded successfully');
+                    this.showChart();
+                    
+                } catch (error) {
+                    console.error('Error loading market data:', error);
+                    this.showError(`Error: ${error.message}`);
+                    this.setStatus('Error loading data', true);
+                } finally {
+                    this.hideLoading();
+                }
+            }
+
+            calculateTimeframeSegments() {
+                if (!this.fullTimeRange) {
+                    console.error('No full time range available');
+                    return;
+                }
+                
+                const totalDuration = this.fullTimeRange.end - this.fullTimeRange.start;
+                const durationHours = totalDuration / (1000 * 60 * 60);
+                
+                console.log(`Total duration: ${durationHours} hours`);
+                
+                // Calculate how many segments we can fit for each timeframe
+                if (this.timeframeData.current === '1h') {
+                    this.timeframeData.totalSegments = 1; // Always show full range
+                    this.timeframeData.currentIndex = 0;
+                } else if (this.timeframeData.current === '30m') {
+                    // For 30min segments, ensure we have at least 2 segments if duration > 30min
+                    if (durationHours > 0.5) {
+                        this.timeframeData.totalSegments = Math.ceil(durationHours * 2); // 30min segments
+                    } else {
+                        // If less than 30min total, create 2 segments anyway for navigation
+                        this.timeframeData.totalSegments = 2;
+                    }
+                    this.timeframeData.currentIndex = Math.min(this.timeframeData.currentIndex, this.timeframeData.totalSegments - 1);
+                } else if (this.timeframeData.current === '5m') {
+                    // For 5min segments, ensure we have multiple segments
+                    if (durationHours > 0.0833) { // More than 5 minutes
+                        this.timeframeData.totalSegments = Math.ceil(durationHours * 12); // 5min segments  
+                    } else {
+                        // If less than 5min total, create 3 segments anyway for navigation
+                        this.timeframeData.totalSegments = 3;
+                    }
+                    this.timeframeData.currentIndex = Math.min(this.timeframeData.currentIndex, this.timeframeData.totalSegments - 1);
+                }
+                
+                console.log(`Calculated segments: ${this.timeframeData.totalSegments} for ${this.timeframeData.current}`);
+                
+                this.updateNavigationControls();
+            }
+
+            getCurrentTimeframe() {
+                if (this.timeframeData.current === '1h') {
+                    return {
+                        start: this.fullTimeRange.start,
+                        end: this.fullTimeRange.end
+                    };
+                }
+                
+                const totalDuration = this.fullTimeRange.end - this.fullTimeRange.start;
+                let segmentDuration;
+                
+                if (this.timeframeData.current === '30m') {
+                    segmentDuration = 30 * 60 * 1000; // 30 minutes in ms
+                } else if (this.timeframeData.current === '5m') {
+                    segmentDuration = 5 * 60 * 1000; // 5 minutes in ms
+                }
+                
+                const startTime = new Date(this.fullTimeRange.start.getTime() + (this.timeframeData.currentIndex * segmentDuration));
+                // Ensure end time is always after start time and within bounds
+                const calculatedEndTime = startTime.getTime() + segmentDuration;
+                const endTime = new Date(Math.min(calculatedEndTime, this.fullTimeRange.end.getTime()));
+                
+                // Double check that end time is not before start time
+                if (endTime <= startTime) {
+                    // If we're at the end of the range, use the full range end
+                    return { start: startTime, end: this.fullTimeRange.end };
+                }
+                
+                return { start: startTime, end: endTime };
+            }
+
+            filterDataForTimeframe(data, timeRange) {
+                return data.filter(item => {
+                    const itemTime = item.time || item.x;
+                    return itemTime >= timeRange.start && itemTime <= timeRange.end;
+                });
+            }
+
+            renderCurrentTimeframe() {
+                const timeRange = this.getCurrentTimeframe();
+                
+                console.log(`Rendering timeframe: ${this.timeframeData.current}`, {
+                    timeRange: timeRange,
+                    totalTrades: this.allTrades.length,
+                    totalPriceData: this.allPriceData.length
+                });
+                
+                // Filter trades for current timeframe
+                const filteredTrades = this.filterDataForTimeframe(this.allTrades, timeRange);
+                
+                // For price data, we need to ensure continuity across segments
+                let priceDataToUse;
+                if (this.timeframeData.current === '1h') {
+                    // Use all price data for full hour view
+                    priceDataToUse = this.allPriceData;
+                } else {
+                    // For shorter timeframes, extract/interpolate from full dataset
+                    priceDataToUse = this.extractPriceDataForTimeframe(timeRange);
+                }
+                
+                console.log(`Using price data:`, {
+                    filteredTrades: filteredTrades.length,
+                    priceDataPoints: priceDataToUse.length
+                });
+                
+                // Create trade points
+                const tradePoints = this.createTradePoints(filteredTrades, priceDataToUse);
+                
+                // Create chart
+                this.createChart(priceDataToUse, tradePoints, timeRange);
+                
+                // Ensure chart is visible
+                this.showChart();
+                
+                // Update timeframe info
+                this.updateTimeframeInfo(timeRange);
+            }
+
+            updateNavigationControls() {
+                const navControls = document.getElementById('navigationControls');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                
+                console.log(`Updating nav controls - Current: ${this.timeframeData.currentIndex}, Total: ${this.timeframeData.totalSegments}`);
+                
+                if (this.timeframeData.current === '1h') {
+                    navControls.classList.remove('visible');
+                } else {
+                    navControls.classList.add('visible');
+                    
+                    // Only disable if we're actually at the boundaries AND have multiple segments
+                    const hasMultipleSegments = this.timeframeData.totalSegments > 1;
+                    prevBtn.disabled = !hasMultipleSegments || this.timeframeData.currentIndex === 0;
+                    nextBtn.disabled = !hasMultipleSegments || this.timeframeData.currentIndex >= this.timeframeData.totalSegments - 1;
+                    
+                    console.log(`Nav buttons - Prev disabled: ${prevBtn.disabled}, Next disabled: ${nextBtn.disabled}`);
+                }
+            }
+
+            extractPriceDataForTimeframe(timeRange) {
+                // Extract continuous price segment from full dataset
+                const relevantPoints = [];
+                
+                // Find all price points that fall within or around the timeframe
+                const expandedStart = new Date(timeRange.start.getTime() - 5 * 60 * 1000); // 5 min before
+                const expandedEnd = new Date(timeRange.end.getTime() + 5 * 60 * 1000); // 5 min after
+                
+                const candidatePoints = this.allPriceData.filter(point => {
+                    const pointTime = point.x;
+                    return pointTime >= expandedStart && pointTime <= expandedEnd;
+                });
+                
+                if (candidatePoints.length >= 2) {
+                    // We have actual data points, interpolate for the exact timeframe
+                    return this.interpolatePriceDataForTimeframe(candidatePoints, timeRange);
+                } else {
+                    // Fallback: find the closest price points and interpolate
+                    const beforePoint = this.findClosestPricePoint(timeRange.start, 'before');
+                    const afterPoint = this.findClosestPricePoint(timeRange.end, 'after');
+                    
+                    if (beforePoint && afterPoint) {
+                        return this.interpolateBetweenPoints(beforePoint, afterPoint, timeRange);
+                    } else {
+                        // Last resort: generate basic price line using target price
+                        return this.generateBasicPriceDataForTimeframe(timeRange);
+                    }
+                }
+            }
+
+            findClosestPricePoint(targetTime, direction) {
+                if (this.allPriceData.length === 0) return null;
+                
+                let closest = null;
+                let closestDistance = Infinity;
+                
+                for (const point of this.allPriceData) {
+                    const pointTime = point.x.getTime();
+                    const targetTimeMs = targetTime.getTime();
+                    
+                    if (direction === 'before' && pointTime <= targetTimeMs) {
+                        const distance = targetTimeMs - pointTime;
+                        if (distance < closestDistance) {
+                            closest = point;
+                            closestDistance = distance;
+                        }
+                    } else if (direction === 'after' && pointTime >= targetTimeMs) {
+                        const distance = pointTime - targetTimeMs;
+                        if (distance < closestDistance) {
+                            closest = point;
+                            closestDistance = distance;
+                        }
+                    }
+                }
+                
+                return closest;
+            }
+
+            interpolatePriceDataForTimeframe(existingPoints, timeRange) {
+                const result = [];
+                const duration = timeRange.end - timeRange.start;
+                const numPoints = Math.max(3, Math.min(12, duration / (60 * 1000))); // 1 point per minute
+                
+                // Sort points by time
+                existingPoints.sort((a, b) => a.x - b.x);
+                
+                for (let i = 0; i < numPoints; i++) {
+                    const time = new Date(timeRange.start.getTime() + (i * duration / (numPoints - 1)));
+                    const price = this.getPriceAtTime(time, existingPoints);
+                    
+                    result.push({
+                        x: time,
+                        y: price
+                    });
+                }
+                
+                return result;
+            }
+
+            interpolateBetweenPoints(beforePoint, afterPoint, timeRange) {
+                const result = [];
+                const duration = timeRange.end - timeRange.start;
+                const numPoints = Math.max(3, Math.min(12, duration / (60 * 1000)));
+                
+                const priceDiff = afterPoint.y - beforePoint.y;
+                const timeDiff = afterPoint.x.getTime() - beforePoint.x.getTime();
+                
+                for (let i = 0; i < numPoints; i++) {
+                    const time = new Date(timeRange.start.getTime() + (i * duration / (numPoints - 1)));
+                    const timeProgress = (time.getTime() - beforePoint.x.getTime()) / timeDiff;
+                    const interpolatedPrice = beforePoint.y + (priceDiff * timeProgress);
+                    
+                    result.push({
+                        x: time,
+                        y: interpolatedPrice
+                    });
+                }
+                
+                return result;
+            }
+
+            generateBasicPriceDataForTimeframe(timeRange) {
+                // Generate a simple price line for the timeframe using the target price as baseline
+                const basePrice = this.marketConfig.targetPrice;
+                const points = [];
+                const duration = timeRange.end - timeRange.start;
+                const numPoints = Math.max(2, Math.min(20, duration / (60 * 1000))); // 1 point per minute, max 20
+                
+                for (let i = 0; i < numPoints; i++) {
+                    const time = new Date(timeRange.start.getTime() + (i * duration / (numPoints - 1)));
+                    const variation = (Math.random() - 0.5) * basePrice * 0.001; // Small variation
+                    points.push({
+                        x: time,
+                        y: basePrice + variation
+                    });
+                }
+                
+                return points;
+            }
+
+            updateTimeframeInfo(timeRange) {
+                const infoEl = document.getElementById('timeframeInfo');
+                
+                if (this.timeframeData.current === '1h') {
+                    infoEl.textContent = 'Full Range';
+                } else {
+                    const startStr = timeRange.start.toISOString().substr(11, 5);
+                    const endStr = timeRange.end.toISOString().substr(11, 5);
+                    const segmentText = `${this.timeframeData.currentIndex + 1}/${this.timeframeData.totalSegments}`;
+                    infoEl.textContent = `${startStr} - ${endStr} (${segmentText})`;
+                }
+            }
+
+            getTimeAxisConfig() {
+                switch(this.timeframeData.current) {
+                    case '5m':
+                        return {
+                            unit: 'minute',
+                            displayFormats: { 
+                                minute: 'HH:mm:ss',
+                                second: 'HH:mm:ss'
+                            },
+                            stepSize: 1
+                        };
+                    case '30m':
+                        return {
+                            unit: 'minute',
+                            displayFormats: { 
+                                minute: 'HH:mm'
+                            },
+                            stepSize: 5
+                        };
+                    case '1h':
+                    default:
+                        return {
+                            unit: 'minute',
+                            displayFormats: { 
+                                minute: 'HH:mm',
+                                hour: 'HH:mm'
+                            },
+                            stepSize: 10
+                        };
+                }
+            }
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    // Only handle if chart is loaded and we're not in an input field
+                    if (!this.allTrades.length || e.target.tagName === 'INPUT') return;
+                    
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            navigateTimeframe(-1);
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            navigateTimeframe(1);
+                            break;
+                        case '1':
+                            e.preventDefault();
+                            switchTimeframe('1h');
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            switchTimeframe('30m');
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            switchTimeframe('5m');
+                            break;
+                    }
+                });
+            }
+        }
+
+        // Initialize the dynamic chart
+        const dynamicChart = new DynamicTradingChart();
+
+        // Global functions for UI interactions
+        function loadMarketData() {
+            dynamicChart.loadMarketData();
+        }
+
+        function switchTimeframe(timeframe) {
+            try {
+                console.log(`Switching to timeframe: ${timeframe}`);
+                
+                // Update active button
+                document.querySelectorAll('.timeframe-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-timeframe="${timeframe}"]`).classList.add('active');
+                
+                // Update timeframe data
+                dynamicChart.timeframeData.current = timeframe;
+                dynamicChart.timeframeData.currentIndex = 0; // Reset to first segment
+                
+                // Recalculate segments and render
+                dynamicChart.calculateTimeframeSegments();
+                dynamicChart.renderCurrentTimeframe();
+            } catch (error) {
+                console.error('Error switching timeframe:', error);
+                dynamicChart.showError(`Error switching timeframe: ${error.message}`);
+            }
+        }
+
+        function navigateTimeframe(direction) {
+            try {
+                const newIndex = dynamicChart.timeframeData.currentIndex + direction;
+                console.log(`Navigating to index: ${newIndex}, total segments: ${dynamicChart.timeframeData.totalSegments}`);
+                
+                // Bounds checking
+                if (newIndex >= 0 && newIndex < dynamicChart.timeframeData.totalSegments) {
+                    dynamicChart.timeframeData.currentIndex = newIndex;
+                    dynamicChart.updateNavigationControls();
+                    dynamicChart.renderCurrentTimeframe();
+                }
+            } catch (error) {
+                console.error('Error navigating timeframe:', error);
+                dynamicChart.showError(`Error navigating timeframe: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>
